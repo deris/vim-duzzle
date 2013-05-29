@@ -113,7 +113,6 @@ let s:current_puzzle = {}
 let duzzle_dir = split(globpath(&runtimepath, 'autoload/duzzle'), '\n')
 let puzzle_files = split(glob(duzzle_dir[0].'/*.vim'), '\n')
 for puzzle_file in puzzle_files
-  echom puzzle_file
   execute 'source ' . puzzle_file
 endfor
 
