@@ -104,6 +104,7 @@ endfunction
 
 
 " Private {{{
+let s:default_enable_keys = 'hjkl'
 let s:default_experiment_name = '_'
 let s:experiments = {}
 let s:current_experiment_name = s:default_experiment_name
