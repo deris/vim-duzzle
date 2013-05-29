@@ -36,7 +36,7 @@ function! duzzle#start(...) " {{{
   if a:0 == 0
     " 前回の続き
   elseif a:0 == 1
-    if !s:is_number(a:1)
+    if a:1 !~ '^\d\+$'
       echoerr 'Invalid Argument:'.a:1
       return
     endif
@@ -46,11 +46,11 @@ function! duzzle#start(...) " {{{
     endif
     let s:current_puzzle_number = a:1
   elseif a:0 == 2
-    if !s:is_string(a:1)
+    if a:1 == ''
       echoerr 'Invalid Argument:'.a:1
       return
     endif
-    if !s:is_number(a:2)
+    if a:2 !~ '^\d\+$'
       echoerr 'Invalid Argument:'.a:2
       return
     endif
@@ -270,14 +270,6 @@ function! s:EchoWarning(message) " {{{
   echohl None
 endfunction
 " }}}
-
-function! s:is_number(num)
-  return type(a:num) == type(0) && num >= 0
-endfunction
-
-function! s:is_string(str)
-  return type(a:str) == type('') && str != ''
-endfunction
 
 " }}}
 
