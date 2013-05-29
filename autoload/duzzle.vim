@@ -29,7 +29,7 @@ set cpo&vim
 function! duzzle#start(...) " {{{
   " TODO:引数チェック関数化
   if a:0 > 2
-    echoerr '[E118]Too much Argument.'
+    call s:EchoError('Error:Too much Argument.')
     return
   endif
 
@@ -37,29 +37,29 @@ function! duzzle#start(...) " {{{
     " 前回の続き
   elseif a:0 == 1
     if a:1 !~ '^\d\+$'
-      echoerr 'Invalid Argument:'.a:1
+      call s:EchoError('Error:Invalid Argument:'.a:1)
       return
     endif
     if !s:exist_puzzle(s:current_experiment_name, a:1)
-      echoerr 'No such puzzle:'.s:current_experiment_name.' '.a:2
+      call s:EchoError('Error:No such puzzle:'.s:current_experiment_name.' '.a:2)
       return
     endif
     let s:current_puzzle_number = a:1
   elseif a:0 == 2
     if a:1 == ''
-      echoerr 'Invalid Argument:'.a:1
+      call s:EchoError('Error:Invalid Argument:'.a:1)
       return
     endif
     if a:2 !~ '^\d\+$'
-      echoerr 'Invalid Argument:'.a:2
+      call s:EchoError('Error:Invalid Argument:'.a:2)
       return
     endif
     if !s:exist_experiment(a:1)
-      echoerr 'No such experiment:'.a:1
+      call s:EchoError('Error:No such experiment:'.a:1)
       return
     endif
     if !s:exist_puzzle(a:1, a:2)
-      echoerr 'No such puzzle:'.a:1.' '.a:2
+      call s:EchoError('Error:No such puzzle:'.a:1.' '.a:2)
       return
     endif
     let s:current_experiment_name = a:1
@@ -267,6 +267,13 @@ endfunction
 function! s:EchoWarning(message) " {{{
   echohl WarningMsg
   echo a:message
+  echohl None
+endfunction
+" }}}
+
+function! s:EchoError(message) " {{{
+  echohl ErrorMsg
+  echomsg a:message
   echohl None
 endfunction
 " }}}
