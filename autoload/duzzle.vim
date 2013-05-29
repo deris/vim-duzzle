@@ -264,6 +264,7 @@ endfunction
 " }}}
 
 function! s:EchoWarning(message) " {{{
+  redraw!
   echohl WarningMsg
   echo a:message
   echohl None
@@ -271,6 +272,7 @@ endfunction
 " }}}
 
 function! s:EchoError(message) " {{{
+  redraw!
   echohl ErrorMsg
   echomsg a:message
   echohl None

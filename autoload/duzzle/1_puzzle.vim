@@ -39,7 +39,7 @@ call duzzle#add_puzzle('_', {
   \ ],
   \ })
 
-count
+"count
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
   \ 'enable_keys' : 'hjkl',
@@ -54,7 +54,7 @@ call duzzle#add_puzzle('_', {
   \ ],
   \ })
 
-count
+"count
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
   \ 'enable_keys' : 'hjkl',
@@ -234,7 +234,7 @@ call duzzle#add_puzzle('_', {
 
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
-  \ 'enable_keys' : 'jkf}{',
+  \ 'enable_keys' : 'jkfF}{',
   \ 'room' : [
   \   '|--------|            |--------|',
   \   '|s       |            |        |',
@@ -256,7 +256,7 @@ call duzzle#add_puzzle('_', {
 
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
-  \ 'enable_keys' : 'jkf}{',
+  \ 'enable_keys' : 'jkfF}{',
   \ 'room' : [
   \   '|--------|            |--------|',
   \   '  |      |            |       p|',
@@ -278,7 +278,7 @@ call duzzle#add_puzzle('_', {
 
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
-  \ 'enable_keys' : 'jkhlf}{',
+  \ 'enable_keys' : 'jkhlfF}{',
   \ 'options' : 'set whichwrap=hl',
   \ 'room' : [
   \   '|--------|            |--------|',
@@ -455,6 +455,12 @@ call duzzle#add_puzzle('_', {
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
   \ 'enable_keys' : 'jkhldt',
+  \ 'limit_key' : {
+  \   'h' : 1,
+  \   'j' : 1,
+  \   'k' : 1,
+  \   'l' : 1,
+  \ },
   \ 'room' : [
   \   '|--------|            |--------|',
   \   '|s       |            |        |',
