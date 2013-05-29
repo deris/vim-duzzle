@@ -239,7 +239,7 @@ function! s:disable_allkey() " {{{
   call extend(nrkeys, range(33, 48))
   call extend(nrkeys, range(58, 126))
   for nrkey in nrkeys
-    call s:noremap_buffer(escape(nr2char(nrkey), '|'), '<Nop>', '')
+    call s:disable_key(escape(nr2char(nrkey), '|'), 'nvo')
   endfor
 
   call s:map_quit_key()
