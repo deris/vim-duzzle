@@ -73,13 +73,7 @@ function! duzzle#start(...) " {{{
   new duzzle
   call s:init_options()
   call s:go_room()
-  call duzzle#init_keys()
-endfunction
-" }}}
-
-function! duzzle#init_keys() " {{{
-  call s:disable_allkey()
-  call s:enable_puzzle_key()
+  call s:init_keys()
 endfunction
 " }}}
 
@@ -155,6 +149,12 @@ endfunction
 function! s:go_room() " {{{
   call s:draw_room(s:current_puzzle['room'])
   call s:move_start_position()
+endfunction
+" }}}
+
+function! s:init_keys() " {{{
+  call s:disable_allkey()
+  call s:enable_puzzle_key()
 endfunction
 " }}}
 
