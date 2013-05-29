@@ -206,7 +206,7 @@ endfunction
 
 function! s:exist_puzzle(experiment, puzzle_number) " {{{
   return s:exist_experiment(a:experiment) &&
-    \ puzzle_number < len(s:experiments[a:experiment])
+    \ a:puzzle_number < len(s:experiments[a:experiment])
 endfunction
 " }}}
 
