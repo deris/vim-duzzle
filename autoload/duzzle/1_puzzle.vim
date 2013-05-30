@@ -421,7 +421,10 @@ call duzzle#add_puzzle('_', {
 
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
-  \ 'enable_keys' : 'jkhldf',
+  \ 'enable_keys' : {
+  \   'n' : 'jkhld',
+  \   'o' : 'f',
+  \ },
   \ 'room' : [
   \   '|--------|            |--------|',
   \   '|s       |            | }     g|',
@@ -431,7 +434,10 @@ call duzzle#add_puzzle('_', {
 
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
-  \ 'enable_keys' : 'jkhldt',
+  \ 'enable_keys' : {
+  \   'n' : 'jkhld',
+  \   'o' : 't',
+  \ },
   \ 'room' : [
   \   '|--------|            |--------|',
   \   '|s      p|            |        |',
@@ -443,7 +449,10 @@ call duzzle#add_puzzle('_', {
 
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
-  \ 'enable_keys' : 'jkhldt',
+  \ 'enable_keys' : {
+  \   'n' : 'jkhld',
+  \   'o' : 't',
+  \ },
   \ 'room' : [
   \   '|--------|            |--------|',
   \   '|s       |            |        |',
@@ -454,7 +463,10 @@ call duzzle#add_puzzle('_', {
 
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
-  \ 'enable_keys' : 'jkhldt',
+  \ 'enable_keys' : {
+  \   'n' : 'jkhld',
+  \   'o' : 't',
+  \ },
   \ 'limit_key' : {
   \   'h' : 1,
   \   'j' : 1,
