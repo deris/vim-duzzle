@@ -99,6 +99,11 @@ function! duzzle#add_puzzle(experiment_name, puzzle) " {{{
 endfunction
 " }}}
 
+function! duzzle#init_keys() " {{{
+  call s:init_keys()
+endfunction
+" }}}
+
 " }}}
 
 
