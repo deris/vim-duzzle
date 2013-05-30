@@ -222,18 +222,49 @@ endfunction
 " }}}
 
 function! s:enable_keys(keys) " {{{
-  let keys = []
-  if type(a:keys) == type('')
-    let keys = split(a:keys, '\zs')
-  elseif type(a:keys) == type([])
-    let keys = a:keys
+  "let keys = {}
+  "if type(a:keys) == type('')
+    "let keys = { 'n' : a:keys }
+  "elseif type(a:keys) == type([])
+    "let keys = { 'n' : a:keys }
+  "elseif type(a:keys) == type({})
+    "let keys = a:keys
+  "else
+    "call s:EchoError('Error:Invalid Argument:'.type(a:keys))
+    "return
+  "endif
+  let keydict = s:build_keydict(a:keys)
+
+  for [mode, keylist] in items(keydict)
+    for key in keylist
+      call s:enable_key(key, mode)
+    endfor
+  endfor
+endfunction
+" }}}
+
+function! s:build_keydict(keys)
+  if type(a:keys) == type('') ||
+    \type(a:keys) == type([])
+    return { 'n' : s:split2char_if_str(a:keys) }
+  elseif type(a:keys) == type({})
+    let keys = {}
+    for key in keys(a:keys)
+      call extend(keys, { key : s:split2char_if_str(a:keys[key]) })
+    endfor
+    return keys
   else
     call s:EchoError('Error:Invalid Argument:'.type(a:keys))
-    return
+    return {}
   endif
-  for key in keys
-    call s:enable_key(key, 'n')
-  endfor
+endfunction
+
+function! s:split2char_if_str(arg) " {{{
+  if type(a:arg) == type('')
+    return split(a:arg, '\zs')
+  else
+    return a:arg
+  endif
 endfunction
 " }}}
 
