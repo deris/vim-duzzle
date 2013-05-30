@@ -116,6 +116,11 @@ for puzzle_file in puzzle_files
   execute 'source ' . puzzle_file
 endfor
 
+let s:current_key_limit = {}
+
+
+nnoremap <expr> <SID>(count)  v:count ? v:count : ''
+
 
 function! s:init_options() " {{{
   setlocal noswapfile
@@ -167,6 +172,7 @@ endfunction
 function! s:init_keys() " {{{
   call s:disable_allkey()
   call s:enable_puzzle_key()
+  call s:enable_keys_with_limit()
 endfunction
 " }}}
 
@@ -203,12 +209,41 @@ function! s:draw_room(room) " {{{
 endfunction
 " }}}
 
-function! s:enable_key_with_limit(key, modes) " {{{
-  let cnt = v:count == 0 ? '' : v:count
+function! s:enable_keys_with_limit() " {{{
+  if !has_key(s:current_puzzle, 'limit_key_use')
+    return
+  endif
+
+  let s:current_key_limit = deepcopy(s:current_puzzle['limit_key_use'])
+
+  for [mode, keydict] in items(s:current_key_limit)
+    for [key, cnt] in items(keydict)
+      call s:enable_key_with_limit(key, mode)
+    endfor
+  endfor
+endfunction
+" }}}
+
+function! s:enable_key_with_limit(key, mode) " {{{
   call s:noremap_buffer(
     \ a:key,
-    \ ':<C-u>call <SID>disable_key_if_limit("'.a:key.'", "'.a:modes.'")<CR>'.cnt.a:key,
-    \ a:modes)
+    \ ':<C-u>call <SID>disable_key_if_limit("'.a:key.'", "'.a:mode.'")<CR>'
+    \   .'<SID>(count)'.a:key,
+    \ a:mode)
+endfunction
+" }}}
+
+function! s:disable_key_if_limit(key, mode) " {{{
+  if !has_key(s:current_key_limit, a:mode) ||
+    \!has_key(s:current_key_limit[a:mode], a:key)
+    call s:noremap_buffer(a:key, '<Nop>', a:mode)
+    return
+  endif
+
+  let s:current_key_limit[a:mode][a:key] -= 1
+  if s:current_key_limit[a:mode][a:key] <= 0
+    call s:noremap_buffer(a:key, '<Nop>', a:mode)
+  endif
 endfunction
 " }}}
 
