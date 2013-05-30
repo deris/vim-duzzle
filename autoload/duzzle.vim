@@ -77,7 +77,6 @@ endfunction
 
 function! duzzle#check_cursor() " {{{
   if s:char_under_cursor() ==# 'g'
-    " TODO:Next Puzzle
     call s:go_next_room()
     return 1
   elseif s:char_under_cursor() ==# '-' ||
