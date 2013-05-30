@@ -83,7 +83,8 @@ function! duzzle#check_cursor() " {{{
   elseif s:char_under_cursor() ==# '-' ||
     \    s:char_under_cursor() ==# '|'
     call s:go_room()
-    call s:EchoWarning('You died, and your clone has been created.')
+    let s:died_times += 1
+    call s:EchoWarning('You died '.s:died_times.' times, and your new clone has been created.')
     return 1
   endif
 
@@ -108,6 +109,7 @@ endfunction
 
 
 " Private {{{
+let s:died_times = 0
 let s:default_enable_keys = 'hjkl'
 let s:default_experiment_name = '_'
 let s:experiments = {}
