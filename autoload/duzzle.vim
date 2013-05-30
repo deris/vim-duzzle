@@ -71,7 +71,6 @@ function! duzzle#start(...) " {{{
 
   " TODO: ウィンドウ作成コマンドの変更
   new duzzle
-  call s:init_options()
   call s:go_room()
 endfunction
 " }}}
@@ -125,6 +124,18 @@ function! s:init_options() " {{{
   setlocal nonumber
   setlocal buftype=nofile
   setfiletype duzzle
+  call s:set_puzzle_options()
+endfunction
+" }}}
+
+function! s:set_puzzle_options() " {{{
+  if !has_key(s:current_puzzle, 'options')
+    return
+  endif
+
+  for option in s:current_puzzle['options']
+    execute option
+  endfor
 endfunction
 " }}}
 
@@ -146,9 +157,10 @@ endfunction
 " }}}
 
 function! s:go_room() " {{{
-  call s:init_keys()
   call s:draw_room(s:current_puzzle['room'])
   call s:move_start_position()
+  call s:init_keys()
+  call s:init_options()
 endfunction
 " }}}
 
@@ -178,6 +190,7 @@ endfunction
 " }}}
 
 function! s:draw_room(room) " {{{
+  let s:save_modifiable = &modifiable
   setlocal modifiable
   try
     call s:clear_buffer()
@@ -185,7 +198,7 @@ function! s:draw_room(room) " {{{
       put =line
     endfor
   finally
-    setlocal nomodifiable
+    let &modifiable = s:save_modifiable
   endtry
 endfunction
 " }}}
