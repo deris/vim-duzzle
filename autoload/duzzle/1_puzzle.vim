@@ -208,7 +208,7 @@ call duzzle#add_puzzle('_', {
 
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
-  \ 'enable_keys' : 'jk0$g_',
+  \ 'enable_keys' : ['j','k','0','$','g_'],
   \ 'room' : [
   \   '|---------|',
   \   ' |s       |',
@@ -222,7 +222,7 @@ call duzzle#add_puzzle('_', {
 
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
-  \ 'enable_keys' : 'jk^0$g_',
+  \ 'enable_keys' : ['j','k','^','0','$','g_'],
   \ 'room' : [
   \   '|---------| ',
   \   ' |s       | ',
