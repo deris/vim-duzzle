@@ -222,7 +222,15 @@ endfunction
 " }}}
 
 function! s:enable_keys(keys) " {{{
-  let keys = split(a:keys, '\zs')
+  let keys = []
+  if type(a:keys) == type('')
+    let keys = split(a:keys, '\zs')
+  elseif type(a:keys) == type([])
+    let keys = a:keys
+  else
+    call s:EchoError('Error:Invalid Argument:'.type(a:keys))
+    return
+  endif
   for key in keys
     call s:enable_key(key, 'n')
   endfor
