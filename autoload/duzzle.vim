@@ -117,6 +117,19 @@ endfunction
 let s:died_times = 0
 let s:default_enable_keys = 'hjkl'
 let s:default_experiment_name = '_'
+let s:default_puzzle_message = [
+  \ '[ルール]',
+  \ '出口(g)まで移動してください。',
+  \ '壁(| or -)に当たると死にます',
+  \ '',
+  \ '[この部屋で使えるコマンド]',
+  \ 'h:左にひとます進む',
+  \ 'j:下にひとます進む',
+  \ 'k:上にひとます進む',
+  \ 'l:右にひとます進む',
+  \ 'w:単語前方に進む',
+  \ 'b:単語後方に進む',
+  \ ]
 let s:experiments = {}
 let s:current_experiment_name = s:default_experiment_name
 let s:current_experiment = []
@@ -284,6 +297,8 @@ function! s:draw_room(room) " {{{
   try
     call s:clear_buffer()
     call setline(1, a:room)
+    call setline(line('$')+1, '')
+    call setline(line('$')+1, s:default_puzzle_message)
   finally
     let &l:modifiable = s:save_modifiable
   endtry
