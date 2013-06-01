@@ -215,7 +215,7 @@ endfunction
 " }}}
 
 function! s:draw_room(room) " {{{
-  let s:save_modifiable = &modifiable
+  let s:save_modifiable = &l:modifiable
   setlocal modifiable
   try
     call s:clear_buffer()
@@ -223,7 +223,7 @@ function! s:draw_room(room) " {{{
       put =line
     endfor
   finally
-    let &modifiable = s:save_modifiable
+    let &l:modifiable = s:save_modifiable
   endtry
 endfunction
 " }}}
