@@ -224,7 +224,7 @@ endfunction
 function! s:died_and_go_room_with_message(message) " {{{
   let s:died_times += 1
   call s:go_room()
-  call s:EchoWarning(message)
+  call s:EchoWarning(a:message)
 endfunction
 " }}}
 
@@ -283,9 +283,7 @@ function! s:draw_room(room) " {{{
   setlocal modifiable
   try
     call s:clear_buffer()
-    for line in a:room
-      put =line
-    endfor
+    call setline(1, a:room)
   finally
     let &l:modifiable = s:save_modifiable
   endtry
