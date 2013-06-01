@@ -388,7 +388,7 @@ function! s:disable_allkey() " {{{
 endfunction
 " }}}
 
-function! s:disable_mouse()
+function! s:disable_mouse() " {{{
   let mouses = [
     \ '<LeftMouse>',
     \ '<LeftDrag>',
@@ -444,6 +444,7 @@ function! s:disable_mouse()
     call s:disable_key(mouse, 'nvoi')
   endfor
 endfunction
+" }}}
 
 function! s:disable_key(lhs, modes) " {{{
   call s:noremap_buffer(a:lhs, '<Nop>', a:modes)
