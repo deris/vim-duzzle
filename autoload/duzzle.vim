@@ -81,9 +81,7 @@ endfunction
 
 function! duzzle#check_cursor() " {{{
   if line('.') > len(s:current_puzzle['room'])
-    call s:go_room()
-    let s:died_times += 1
-    call s:EchoWarning("You can't move this area. So you died '.s:died_times.' times, and your new clone has been created.")
+    call s:died_and_go_room_with_message("You can't move this area. So you died '.s:died_times.' times, and your new clone has been created.")
     return 1
   endif
   if s:char_under_cursor() ==# 'g'
@@ -91,9 +89,7 @@ function! duzzle#check_cursor() " {{{
     return 1
   elseif s:char_under_cursor() ==# '-' ||
     \    s:char_under_cursor() ==# '|'
-    call s:go_room()
-    let s:died_times += 1
-    call s:EchoWarning('You died '.s:died_times.' times, and your new clone has been created.')
+    call s:died_and_go_room_with_message('You died '.s:died_times.' times, and your new clone has been created.')
     return 1
   endif
 
@@ -222,6 +218,13 @@ function! s:go_next_room() " {{{
   let s:current_puzzle_number += 1
   let s:current_puzzle = s:current_experiment[s:current_puzzle_number]
   call s:go_room()
+endfunction
+" }}}
+
+function! s:died_and_go_room_with_message(message) " {{{
+  let s:died_times += 1
+  call s:go_room()
+  call s:EchoWarning(message)
 endfunction
 " }}}
 
