@@ -123,15 +123,13 @@ let s:default_experiment_name = '_'
 let s:default_puzzle_message = [
   \ '[ルール]',
   \ '出口(g)まで移動してください。',
-  \ '壁(| or -)に当たると死にます',
+  \ '壁(|)or(-)に当たると死にます',
   \ '',
   \ '[この部屋で使えるコマンド]',
-  \ 'h:左にひとます進む',
-  \ 'j:下にひとます進む',
-  \ 'k:上にひとます進む',
-  \ 'l:右にひとます進む',
-  \ 'w:単語前方に進む',
-  \ 'b:単語後方に進む',
+  \ 'h:左に進む',
+  \ 'j:下に進む',
+  \ 'k:上に進む',
+  \ 'l:右に進む',
   \ ]
 let s:experiments = {}
 let s:current_experiment_name = s:default_experiment_name
