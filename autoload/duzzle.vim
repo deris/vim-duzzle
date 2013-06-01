@@ -189,7 +189,21 @@ function! s:show_start_message() " {{{
 
   " TODO: dont set puzzle options if start
   call s:init_options()
+  nnoremap <script><expr><buffer> <CR>  <SID>go_room_if_press_start()
+
   call s:draw_room(s:start_message)
+endfunction
+" }}}
+
+function! s:go_room_if_press_start() " {{{
+  let line = getline('.')
+
+  if line !~ '\[開始する\]'
+    return
+  endif
+
+  " TODO: only [開始する] under cursor
+  call s:go_room()
 endfunction
 " }}}
 
