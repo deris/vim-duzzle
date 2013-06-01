@@ -127,6 +127,30 @@ for puzzle_file in puzzle_files
 endfor
 
 let s:current_key_limit = {}
+let s:start_message = [
+  \ "おめでとうございます",
+  \ "あなたは実験の被験者に選ばれました",
+  \ "",
+  \ "さぁ、ゲームを始めましょう",
+  \ "あなたは壁で囲まれた部屋の中に閉じ込められました",
+  \ "あなたに課されたことはただひとつ",
+  \ "部屋ごとに存在するゴールまでたどり着くことです",
+  \ "",
+  \ "ルールは部屋それぞれですが、以下のルールは基本的にすべての部屋共通です",
+  \ "* 部屋にはスタート地点がある",
+  \ "* 部屋には出口がある",
+  \ "* 部屋の壁にさわると死にスタート地点に戻る",
+  \ "* スタート地点に戻るコマンド(通常は's')がある",
+  \ "",
+  \ "まぁやっていくうちにわかっていくでしょう",
+  \ "あなたが間違った選択をすると死ぬこともあるのでご注意を",
+  \ "なお、どうしても現実に戻りたい場合、'Q'を押下することで",
+  \ "強制的に現実に戻ることができます",
+  \ "",
+  \ "それでは実験を開始してください",
+  \ "",
+  \ "[開始する] [逃げる]",
+  \ ]
 
 
 nnoremap <expr> <SID>(count)  v:count ? v:count : ''
@@ -160,6 +184,12 @@ endfunction
 " }}}
 
 function! s:show_start_message() " {{{
+  call s:disable_allkey()
+  call s:enable_keys(s:default_enable_keys)
+
+  " TODO: dont set puzzle options if start
+  call s:init_options()
+  call s:draw_room(s:start_message)
 endfunction
 " }}}
 
