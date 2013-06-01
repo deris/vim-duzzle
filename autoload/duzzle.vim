@@ -236,6 +236,7 @@ function! s:init_keys() " {{{
   call s:disable_allkey()
   call s:enable_puzzle_key()
   call s:enable_keys_with_limit()
+  call s:disable_puzzle_key_count()
 endfunction
 " }}}
 
@@ -244,6 +245,16 @@ function! s:enable_puzzle_key() " {{{
     call s:enable_keys(s:current_puzzle['enable_keys'])
   else
     call s:enable_keys(s:default_enable_keys)
+  endif
+endfunction
+" }}}
+
+function! s:disable_puzzle_key_count() " {{{
+  if has_key(s:current_puzzle, 'disable_key_count') &&
+    \s:current_puzzle['disable_key_count'] == 1
+    for key in split('123456789', '\zs')
+      call s:disable_key(key, 'n')
+    endfor
   endif
 endfunction
 " }}}
