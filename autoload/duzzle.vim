@@ -80,6 +80,9 @@ endfunction
 " }}}
 
 function! duzzle#check_cursor() " {{{
+  if !s:puzzle_started
+    return 0
+  endif
   if line('.') > len(s:current_puzzle['room'])
     call s:died_and_go_room_with_message("You can't move this area. So you died '.s:died_times.' times, and your new clone has been created.")
     return 1
@@ -142,6 +145,7 @@ for puzzle_file in puzzle_files
 endfor
 
 let s:current_key_limit = {}
+let s:puzzle_started = 0
 let s:start_message = [
   \ "おめでとうございます",
   \ "あなたは実験の被験者に選ばれました",
@@ -217,6 +221,7 @@ function! s:go_room_if_press_start() " {{{
     return
   endif
 
+  let s:puzzle_started = 1
   " TODO: only [開始する] under cursor
   call s:go_room()
 endfunction
