@@ -99,7 +99,7 @@ call duzzle#add_puzzle('_', {
 
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
-  \ 'enable_keys' : 'jkwbege',
+  \ 'enable_keys' : ['j','k','w','b','e','ge'],
   \ 'disable_key_count' : 1,
   \ 'room' : [
   \   '|--------|',
