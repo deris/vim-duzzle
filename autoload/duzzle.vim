@@ -297,7 +297,7 @@ function! s:enable_keys(keys) " {{{
 endfunction
 " }}}
 
-function! s:build_keydict(keys)
+function! s:build_keydict(keys) " {{{
   if type(a:keys) == type('') ||
     \type(a:keys) == type([])
     return { 'n' : s:split2char_if_str(a:keys) }
@@ -312,6 +312,7 @@ function! s:build_keydict(keys)
     return {}
   endif
 endfunction
+" }}}
 
 function! s:split2char_if_str(arg) " {{{
   if type(a:arg) == type('')
