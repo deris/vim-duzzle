@@ -383,9 +383,67 @@ function! s:disable_allkey() " {{{
     call s:disable_key(escape('g'.nr2char(nrkey), '|'), 'nvo')
   endfor
 
+  call s:disable_mouse()
   call s:map_quit_key()
 endfunction
 " }}}
+
+function! s:disable_mouse()
+  let mouses = [
+    \ '<LeftMouse>',
+    \ '<LeftDrag>',
+    \ '<LeftRelease>',
+    \ '<2-LeftMouse>',
+    \ '<2-LeftDrag>',
+    \ '<2-LeftRelease>',
+    \ '<3-LeftMouse>',
+    \ '<3-LeftDrag>',
+    \ '<3-LeftRelease>',
+    \ '<4-LeftMouse>',
+    \ '<4-LeftDrag>',
+    \ '<4-LeftRelease>',
+    \ '<C-LeftMouse>',
+    \ '<C-LeftDrag>',
+    \ '<C-LeftRelease>',
+    \ '<2-C-LeftMouse>',
+    \ '<2-C-LeftDrag>',
+    \ '<2-C-LeftRelease>',
+    \ '<3-C-LeftMouse>',
+    \ '<3-C-LeftDrag>',
+    \ '<3-C-LeftRelease>',
+    \ '<4-C-LeftMouse>',
+    \ '<4-C-LeftDrag>',
+    \ '<4-C-LeftRelease>',
+    \ '<S-LeftMouse>',
+    \ '<S-LeftDrag>',
+    \ '<S-LeftRelease>',
+    \ '<2-S-LeftMouse>',
+    \ '<2-S-LeftDrag>',
+    \ '<2-S-LeftRelease>',
+    \ '<3-S-LeftMouse>',
+    \ '<3-S-LeftDrag>',
+    \ '<3-S-LeftRelease>',
+    \ '<4-S-LeftMouse>',
+    \ '<4-S-LeftDrag>',
+    \ '<4-S-LeftRelease>',
+    \ '<M-LeftMouse>',
+    \ '<M-LeftDrag>',
+    \ '<M-LeftRelease>',
+    \ '<2-M-LeftMouse>',
+    \ '<2-M-LeftDrag>',
+    \ '<2-M-LeftRelease>',
+    \ '<3-M-LeftMouse>',
+    \ '<3-M-LeftDrag>',
+    \ '<3-M-LeftRelease>',
+    \ '<4-M-LeftMouse>',
+    \ '<4-M-LeftDrag>',
+    \ '<4-M-LeftRelease>',
+    \ ]
+
+  for mouse in mouses
+    call s:disable_key(mouse, 'nvoi')
+  endfor
+endfunction
 
 function! s:disable_key(lhs, modes) " {{{
   call s:noremap_buffer(a:lhs, '<Nop>', a:modes)
