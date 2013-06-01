@@ -198,7 +198,7 @@ endfunction
 " }}}
 
 function! s:is_first_start() " {{{
-  return s:current_puzzle_number == 0
+  return s:puzzle_started == 0
 endfunction
 " }}}
 
