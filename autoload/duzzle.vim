@@ -398,7 +398,11 @@ endfunction
 " }}}
 
 function! s:noremap_buffer(lhs, rhs, modes) " {{{
-  let modes = split(a:modes, '\zs')
+  if type(a:modes) == type('')
+    let modes = split(a:modes, '\zs')
+  else
+    let modes = a:modes
+  endif
   for mode in modes
     execute mode.'noremap <silent><buffer> '.a:lhs.' '.a:rhs
   endfor
