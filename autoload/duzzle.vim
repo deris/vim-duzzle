@@ -289,17 +289,6 @@ endfunction
 " }}}
 
 function! s:enable_keys(keys) " {{{
-  "let keys = {}
-  "if type(a:keys) == type('')
-    "let keys = { 'n' : a:keys }
-  "elseif type(a:keys) == type([])
-    "let keys = { 'n' : a:keys }
-  "elseif type(a:keys) == type({})
-    "let keys = a:keys
-  "else
-    "call s:EchoError('Error:Invalid Argument:'.type(a:keys))
-    "return
-  "endif
   let keydict = s:build_keydict(a:keys)
 
   for [mode, keylist] in items(keydict)
