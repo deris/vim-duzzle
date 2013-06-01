@@ -206,7 +206,7 @@ function! s:show_start_message() " {{{
   call s:init_options()
   nnoremap <buffer> <CR>  :<C-u>call <SID>go_room_if_press_start()<CR>
 
-  call s:draw_room(s:start_message)
+  call s:draw_lines(s:start_message)
 endfunction
 " }}}
 
@@ -299,6 +299,18 @@ function! s:draw_room(room) " {{{
     call setline(1, a:room)
     call setline(line('$')+1, '')
     call setline(line('$')+1, s:default_puzzle_message)
+  finally
+    let &l:modifiable = s:save_modifiable
+  endtry
+endfunction
+" }}}
+
+function! s:draw_lines(lines) " {{{
+  let s:save_modifiable = &l:modifiable
+  setlocal modifiable
+  try
+    call s:clear_buffer()
+    call setline(1, a:lines)
   finally
     let &l:modifiable = s:save_modifiable
   endtry
