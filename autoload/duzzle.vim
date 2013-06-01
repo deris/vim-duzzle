@@ -84,7 +84,7 @@ function! duzzle#check_cursor() " {{{
     return 0
   endif
   if line('.') > len(s:current_puzzle['room'])
-    call s:died_and_go_room_with_message("You can't move this area. So you died ".s:died_times." times, and your new clone has been created.")
+    call s:died_and_go_room_with_message("You can't move this area. So you died %s times, and your new clone has been created.")
     return 1
   endif
   if s:char_under_cursor() ==# 'g'
@@ -92,7 +92,7 @@ function! duzzle#check_cursor() " {{{
     return 1
   elseif s:char_under_cursor() ==# '-' ||
     \    s:char_under_cursor() ==# '|'
-    call s:died_and_go_room_with_message('You died '.s:died_times.' times, and your new clone has been created.')
+    call s:died_and_go_room_with_message('You died %s times, and your new clone has been created.')
     return 1
   endif
 
@@ -242,7 +242,7 @@ endfunction
 function! s:died_and_go_room_with_message(message) " {{{
   let s:died_times += 1
   call s:go_room()
-  call s:EchoWarning(a:message)
+  call s:EchoWarning(printf(a:message, s:died_times))
 endfunction
 " }}}
 
