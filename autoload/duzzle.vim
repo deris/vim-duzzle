@@ -80,6 +80,12 @@ endfunction
 " }}}
 
 function! duzzle#check_cursor() " {{{
+  if line('.') > len(s:current_puzzle['room'])
+    call s:go_room()
+    let s:died_times += 1
+    call s:EchoWarning("You can't move this area. So you died '.s:died_times.' times, and your new clone has been created.")
+    return 1
+  endif
   if s:char_under_cursor() ==# 'g'
     call s:go_next_room()
     return 1
