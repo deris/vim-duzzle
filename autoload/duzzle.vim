@@ -133,6 +133,12 @@ let s:default_puzzle_option_message = [
   \ 'k:上に進む',
   \ 'l:右に進む',
   \ ]
+let s:default_disable_key_count_message = [
+  \ '[カウント指定無効部屋]',
+  \ 'この部屋はコマンド実行前に数値を入力することで',
+  \ 'その回数コマンドを実行するカウント指定を利用することができません',
+  \ ]
+
 let s:experiments = {}
 let s:current_experiment_name = s:default_experiment_name
 let s:current_experiment = []
@@ -308,6 +314,11 @@ function! s:draw_room() " {{{
       call setline(line('$')+1, s:current_puzzle['message'])
     else
       call setline(line('$')+1, s:default_puzzle_option_message)
+    endif
+    call setline(line('$')+1, '')
+    if has_key(s:current_puzzle, 'disable_key_count') &&
+      \s:current_puzzle['disable_key_count']
+      call setline(line('$')+1, s:default_disable_key_count_message)
     endif
   finally
     let &l:modifiable = s:save_modifiable
