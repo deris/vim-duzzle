@@ -425,6 +425,9 @@ call duzzle#add_puzzle('_', {
   \   'n' : 'jkhld',
   \   'o' : 'f',
   \ },
+  \ 'options' : [
+  \   'setlocal modifiable',
+  \ ],
   \ 'room' : [
   \   '|--------|            |--------|',
   \   '|s       |            | }     g|',
@@ -438,6 +441,9 @@ call duzzle#add_puzzle('_', {
   \   'n' : 'jkhld',
   \   'o' : 't',
   \ },
+  \ 'options' : [
+  \   'setlocal modifiable',
+  \ ],
   \ 'room' : [
   \   '|--------|            |--------|',
   \   '|s      p|            |        |',
@@ -453,6 +459,9 @@ call duzzle#add_puzzle('_', {
   \   'n' : 'jkhld',
   \   'o' : 't',
   \ },
+  \ 'options' : [
+  \   'setlocal modifiable',
+  \ ],
   \ 'room' : [
   \   '|--------|            |--------|',
   \   '|s       |            |        |',
@@ -473,6 +482,9 @@ call duzzle#add_puzzle('_', {
   \   'k' : 1,
   \   'l' : 1,
   \ },
+  \ 'options' : [
+  \   'setlocal modifiable',
+  \ ],
   \ 'room' : [
   \   '|--------|            |--------|',
   \   '|s       |            |        |',
