@@ -32,12 +32,6 @@ set cpo&vim
 
 command! -nargs=* DuzzleStart call duzzle#start(<f-args>)
 
-augroup duzzle
-  autocmd!
-  autocmd CursorMoved  *  if &ft=='duzzle' | call duzzle#check_cursor() | endif
-  autocmd BufEnter     *  if &ft=='duzzle' | call duzzle#init_keys() | endif
-augroup END
-
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
