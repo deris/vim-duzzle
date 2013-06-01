@@ -125,6 +125,8 @@ let s:default_puzzle_message = [
   \ '出口(g)まで移動してください。',
   \ '壁(|)or(-)に当たると死にます',
   \ '',
+  \ ]
+let s:default_puzzle_option_message = [
   \ '[この部屋で使えるコマンド]',
   \ 'h:左に進む',
   \ 'j:下に進む',
@@ -302,6 +304,11 @@ function! s:draw_room() " {{{
     call setline(1, s:current_puzzle['room'])
     call setline(line('$')+1, '')
     call setline(line('$')+1, s:default_puzzle_message)
+    if has_key(s:current_puzzle, 'message')
+      call setline(line('$')+1, s:current_puzzle['message'])
+    else
+      call setline(line('$')+1, s:default_puzzle_option_message)
+    endif
   finally
     let &l:modifiable = s:save_modifiable
   endtry
