@@ -71,7 +71,11 @@ function! duzzle#start(...) " {{{
 
   " TODO: ウィンドウ作成コマンドの変更
   new duzzle
-  call s:go_room()
+  if s:is_first_start()
+    call s:show_start_message()
+  else
+    call s:go_room()
+  endif
 endfunction
 " }}}
 
@@ -147,6 +151,15 @@ function! s:set_puzzle_options() " {{{
   for option in s:current_puzzle['options']
     execute option
   endfor
+endfunction
+" }}}
+
+function! s:is_first_start() " {{{
+  return s:current_puzzle_number == 0
+endfunction
+" }}}
+
+function! s:show_start_message() " {{{
 endfunction
 " }}}
 
