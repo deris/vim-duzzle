@@ -250,7 +250,7 @@ endfunction
 " }}}
 
 function! s:go_room() " {{{
-  call s:draw_room(s:current_puzzle['room'])
+  call s:draw_room()
   call s:move_start_position()
   call s:init_keys()
   call s:init_options()
@@ -294,12 +294,12 @@ function! s:move_start_position() " {{{
 endfunction
 " }}}
 
-function! s:draw_room(room) " {{{
+function! s:draw_room() " {{{
   let s:save_modifiable = &l:modifiable
   setlocal modifiable
   try
     call s:clear_buffer()
-    call setline(1, a:room)
+    call setline(1, s:current_puzzle['room'])
     call setline(line('$')+1, '')
     call setline(line('$')+1, s:default_puzzle_message)
   finally
