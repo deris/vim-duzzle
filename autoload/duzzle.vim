@@ -179,7 +179,7 @@ let s:start_message = [
   \ "",
   \ "それでは実験を開始してください",
   \ "",
-  \ "[開始する] [逃げる]",
+  \ "[開始する]",
   \ ]
 let s:endding_message = [
   \ "I'm so sad. This is the last room. See you soon.",
