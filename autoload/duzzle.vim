@@ -179,7 +179,7 @@ let s:start_message = [
   \ "",
   \ "それでは実験を開始してください",
   \ "",
-  \ "[開始する]",
+  \ "[Press Enter]",
   \ ]
 let s:endding_message = [
   \ "I'm so sad. This is the last room. See you soon.",
@@ -232,12 +232,11 @@ endfunction
 function! s:go_room_if_press_start() " {{{
   let line = getline('.')
 
-  if line !~ '\[開始する\]'
+  if line !~ '\[Press Enter\]'
     return
   endif
 
   let s:puzzle_started = 1
-  " TODO: only [開始する] under cursor
   call s:go_room()
 endfunction
 " }}}
