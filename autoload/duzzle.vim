@@ -184,7 +184,7 @@ let s:start_message = [
   \ "[Press Enter]",
   \ ]
 let s:endding_message = [
-  \ "残念ですがこれで実験は終わりです。次のゲームでまたお会いしましょう",
+  \ "残念ですがこれで実験は終わりです。お疲れ様でした。次の実験でまたお会いしましょう",
   \ "press Q for quit.",
   \ ]
 
