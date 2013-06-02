@@ -310,11 +310,12 @@ function! s:draw_room() " {{{
     call setline(1, s:current_puzzle['room'])
     call setline(line('$')+1, '')
     call setline(line('$')+1, s:default_puzzle_message)
-    if has_key(s:current_puzzle, 'message')
-      call setline(line('$')+1, s:current_puzzle['message'])
+    if has_key(s:current_puzzle, 'enable_keys')
+      call s:print_enable_keys(s:current_puzzle['enable_keys'])
     else
-      call setline(line('$')+1, s:default_puzzle_option_message)
+      call s:print_enable_keys(s:default_enable_keys)
     endif
+
     call setline(line('$')+1, '')
     if has_key(s:current_puzzle, 'disable_key_count') &&
       \s:current_puzzle['disable_key_count']
@@ -325,6 +326,61 @@ function! s:draw_room() " {{{
   endtry
 endfunction
 " }}}
+
+let s:enable_key_message = {
+  \ 'n' : {
+  \   'h' : 'h:左に進む',
+  \   'j' : 'j:下に進む',
+  \   'k' : 'k:上に進む',
+  \   'l' : 'l:右に進む',
+  \   'w' : 'w:1単語前方に進む',
+  \   'b' : 'b:1単語後方に進む',
+  \   'e' : 'e:1単語前方の単語の終わりに進む',
+  \   'ge': 'ge:1単語後方の単語の終わりに進む',
+  \   'f' : 'f:続いて文字を入力することで左に向かって入力文字まで移動する',
+  \   'F' : 'F:続いて文字を入力することで右に向かって入力文字まで移動する',
+  \   't' : 't:続いて文字を入力することで左に向かって入力文字の手前まで移動する',
+  \   'T' : 'T:続いて文字を入力することで右に向かって入力文字の手前まで移動する',
+  \   ';' : ';:右に向かって一個前にf,F,t,Tの後に入力した文字まで移動する',
+  \   ',' : ',:左に向かって一個前にf,F,t,Tの後に入力した文字まで移動する',
+  \   '^' : '^:その行の最初の非空白文字に移動する',
+  \   '0' : '0:その行の最初に移動する',
+  \   '$' : '$:その行の最後に移動する',
+  \   'g_': 'g_:その行の最後の非空白文字に移動する',
+  \   '{' : '{:上方向に空行が出てくる位置まで移動(段落後方に)',
+  \   '}' : '}:下方向に空行が出てくる位置まで移動(段落前方に)',
+  \   '/' : '/:前方検索する',
+  \   '?' : '?:後方検索する',
+  \   '*' : '*:カーソル位置の単語を前方検索する',
+  \   '#' : '#:カーソル位置の単語を後方検索する',
+  \   'n' : 'n:最後の検索を繰り返す',
+  \   'N' : 'N:最後の逆方向に検索を繰り返す',
+  \   '%' : '%:対応する括弧に移動する',
+  \   'd' : 'd:続けて入力したコマンドの位置まで削除する',
+  \ },
+  \ 'o' : {
+  \   'f' : 'f:続いて文字を入力することで左に向かって入力文字まで移動する',
+  \   't' : 't:続いて文字を入力することで左に向かって入力文字の手前まで移動する',
+  \ },
+  \ }
+
+function! s:print_enable_keys(keys)
+  let keydict = s:build_keydict(a:keys)
+
+  call setline(line('$')+1, '[この部屋で使えるコマンド]')
+  for key in get(keydict, 'n', [])
+    call setline(line('$')+1, s:enable_key_message['n'][key])
+  endfor
+
+  if has_key(keydict, 'o')
+    call setline(line('$')+1, '')
+    call setline(line('$')+1, '[この部屋でdの後に許されているコマンド]')
+    for key in keydict['o']
+      call setline(line('$')+1, s:enable_key_message['o'][key])
+    endfor
+  endif
+endfunction
+
 
 function! s:draw_lines(lines) " {{{
   let s:save_modifiable = &l:modifiable
