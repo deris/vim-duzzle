@@ -199,6 +199,7 @@ function! s:init_options() " {{{
   setlocal nonumber
   setlocal buftype=nofile
   setfiletype duzzle
+  nohlsearch
   call s:set_puzzle_options()
 endfunction
 " }}}
