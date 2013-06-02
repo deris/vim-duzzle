@@ -283,11 +283,13 @@ endfunction
 " }}}
 
 function! s:disable_puzzle_key_count() " {{{
-  if get(s:current_puzzle, 'disable_key_count', 0)
-    for key in split('123456789', '\zs')
+  for key in split('123456789', '\zs')
+    if get(s:current_puzzle, 'disable_key_count', 0)
       call s:disable_key(key, 'n')
-    endfor
-  endif
+    else
+      call s:enable_key(key, 'n')
+    endif
+  endfor
 endfunction
 " }}}
 
