@@ -269,7 +269,7 @@ function! s:init_keys() " {{{
   call s:disable_allkey()
   call s:enable_puzzle_key()
   call s:enable_keys_with_limit()
-  call s:disable_puzzle_key_count()
+  call s:set_puzzle_key_count()
 endfunction
 " }}}
 
@@ -282,7 +282,7 @@ function! s:enable_puzzle_key() " {{{
 endfunction
 " }}}
 
-function! s:disable_puzzle_key_count() " {{{
+function! s:set_puzzle_key_count() " {{{
   for key in split('123456789', '\zs')
     if get(s:current_puzzle, 'disable_key_count', 0)
       call s:disable_key(key, 'n')
