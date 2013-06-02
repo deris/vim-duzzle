@@ -84,7 +84,7 @@ function! duzzle#check_cursor() " {{{
     return 0
   endif
   if line('.') > len(s:current_puzzle['room'])
-    call s:died_and_go_room_with_message("You can't move this area. So you died %s times, and your new clone has been created.")
+    call s:died_and_go_room_with_message(s:died_message_when_out_of_area)
     return 1
   endif
   if s:char_under_cursor() ==# 'g'
@@ -92,7 +92,7 @@ function! duzzle#check_cursor() " {{{
     return 1
   elseif s:char_under_cursor() ==# '-' ||
     \    s:char_under_cursor() ==# '|'
-    call s:died_and_go_room_with_message('You died %s times, and your new clone has been created.')
+    call s:died_and_go_room_with_message(s:died_message_when_tuch_the_wall)
     return 1
   endif
 
@@ -154,6 +154,9 @@ let puzzle_files = split(glob(duzzle_dir[0].'/*.vim'), '\n')
 for puzzle_file in puzzle_files
   execute 'source ' . puzzle_file
 endfor
+
+let s:died_message_when_tuch_the_wall = "You died %s times, and your new clone has been created."
+let s:died_message_when_out_of_area = "You can't move this area. So you died %s times, and your new clone has been created."
 
 let s:current_key_limit = {}
 let s:puzzle_started = 0
