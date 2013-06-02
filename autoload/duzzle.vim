@@ -155,8 +155,8 @@ for puzzle_file in puzzle_files
   execute 'source ' . puzzle_file
 endfor
 
-let s:died_message_when_tuch_the_wall = "You died %s times, and your new clone has been created."
-let s:died_message_when_out_of_area = "You can't move this area. So you died %s times, and your new clone has been created."
+let s:died_message_when_tuch_the_wall = "あなたは死にました。あなたが死ぬのは %s回目です"
+let s:died_message_when_out_of_area = "あなたはこのエリアに移動出来ません。あなたは死にました。あなたが死ぬのは %s回目です"
 
 let s:current_key_limit = {}
 let s:puzzle_started = 0
@@ -184,7 +184,7 @@ let s:start_message = [
   \ "[Press Enter]",
   \ ]
 let s:endding_message = [
-  \ "I'm so sad. This is the last room. See you soon.",
+  \ "残念ですがこれで実験は終わりです。次のゲームでまたお会いしましょう",
   \ "press Q for quit.",
   \ ]
 
