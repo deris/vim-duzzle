@@ -41,7 +41,7 @@ function! duzzle#start(...) " {{{
       return
     endif
     if !s:exist_puzzle(s:current_experiment_name, a:1)
-      call s:EchoError('Error:No such puzzle:'.s:current_experiment_name.' '.a:2)
+      call s:EchoError('Error:No such puzzle:'.s:current_experiment_name.' '.a:1)
       return
     endif
     let s:current_puzzle_number = a:1
