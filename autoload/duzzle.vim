@@ -70,7 +70,7 @@ function! duzzle#start(...) " {{{
   let s:current_puzzle = s:current_experiment[s:current_puzzle_number]
 
   " TODO: ウィンドウ作成コマンドの変更
-  new duzzle
+  tabnew duzzle
   if s:is_first_start()
     call s:show_start_message()
   else
