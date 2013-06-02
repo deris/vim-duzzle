@@ -181,6 +181,10 @@ let s:start_message = [
   \ "",
   \ "[開始する] [逃げる]",
   \ ]
+let s:endding_message = [
+  \ "I'm so sad. This is the last room. See you soon.",
+  \ "press Q for quit.",
+  \ ]
 
 
 nnoremap <expr> <SID>(count)  v:count ? v:count : ''
@@ -240,13 +244,30 @@ endfunction
 
 function! s:go_next_room() " {{{
   if s:is_last_puzzle()
-    echo "I'm so sad. This is the last room. See you soon."
+    call s:go_endding()
     return
   endif
 
   let s:current_puzzle_number += 1
   let s:current_puzzle = s:current_experiment[s:current_puzzle_number]
   call s:go_room()
+endfunction
+" }}}
+
+function! s:go_endding()
+  call s:show_endding_message()
+  call s:enable_allkey()
+endfunction
+
+function! s:show_endding_message() " {{{
+  let s:save_modifiable = &l:modifiable
+  setlocal modifiable
+  try
+    call s:clear_buffer()
+    call setline(1, s:endding_message)
+  finally
+    let &l:modifiable = s:save_modifiable
+  endtry
 endfunction
 " }}}
 
@@ -495,6 +516,21 @@ function! s:split2char_if_str(arg) " {{{
   else
     return a:arg
   endif
+endfunction
+" }}}
+
+function! s:enable_allkey() " {{{
+  let nrkeys = []
+  call extend(nrkeys, range(33, 48))
+  call extend(nrkeys, range(58, 126))
+  for nrkey in nrkeys
+    for mode in split('nvo', '\ze')
+      call s:enable_key(escape(nr2char(nrkey), '|'), 'nvo')
+      call s:enable_key(escape('g'.nr2char(nrkey), '|'), 'nvo')
+    endfor
+  endfor
+
+  call s:map_quit_key()
 endfunction
 " }}}
 
