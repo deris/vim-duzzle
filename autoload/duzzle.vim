@@ -283,8 +283,7 @@ endfunction
 " }}}
 
 function! s:disable_puzzle_key_count() " {{{
-  if has_key(s:current_puzzle, 'disable_key_count') &&
-    \s:current_puzzle['disable_key_count'] == 1
+  if get(s:current_puzzle, 'disable_key_count', 0)
     for key in split('123456789', '\zs')
       call s:disable_key(key, 'n')
     endfor
@@ -317,8 +316,7 @@ function! s:draw_room() " {{{
     endif
 
     call setline(line('$')+1, '')
-    if has_key(s:current_puzzle, 'disable_key_count') &&
-      \s:current_puzzle['disable_key_count']
+    if get(s:current_puzzle,  'disable_key_count', 0)
       call setline(line('$')+1, s:default_disable_key_count_message)
     endif
   finally
