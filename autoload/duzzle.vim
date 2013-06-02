@@ -156,7 +156,7 @@ for puzzle_file in puzzle_files
 endfor
 
 let s:died_message_when_tuch_the_wall = "あなたは死にました。あなたが死ぬのは %s回目です"
-let s:died_message_when_out_of_area = "あなたはこのエリアに移動出来ません。あなたは死にました。あなたが死ぬのは %s回目です"
+let s:died_message_when_out_of_area = "あなたはこのエリアに移動出来ません。" . s:died_message_when_tuch_the_wall
 
 let s:current_key_limit = {}
 let s:puzzle_started = 0
