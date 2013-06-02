@@ -231,7 +231,6 @@ call duzzle#add_puzzle('_', {
 call duzzle#add_puzzle('_', {
   \ 'name' : 'first room',
   \ 'enable_keys' : ['j','k','^','0','$','g_'],
-  \ 'disable_key_count' : 1,
   \ 'room' : [
   \   '|---------| ',
   \   ' |s       | ',
