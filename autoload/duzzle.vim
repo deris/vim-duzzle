@@ -226,7 +226,7 @@ function! s:show_start_message() " {{{
 
   " TODO: dont set puzzle options if start
   call s:init_options()
-  nnoremap <buffer> <CR>  :<C-u>call <SID>go_room_if_press_start()<CR>
+  nnoremap <silent><buffer> <CR>  :<C-u>call <SID>go_room_if_press_start()<CR>
 
   call s:draw_lines(s:start_message)
 endfunction
