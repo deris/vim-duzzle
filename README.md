@@ -3,6 +3,12 @@ vim-duzzle
 
 This is puzzle game on vim.
 
+Screenshot
+---
+
+![screenshot](http://gifzo.net/jBcfG8aDEC.gif)
+
+
 Usage
 ---
 
