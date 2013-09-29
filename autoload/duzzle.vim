@@ -200,6 +200,7 @@ function! s:init_options() " {{{
   setlocal nonumber
   setlocal buftype=nofile
   setfiletype duzzle
+  let @/ = ''
   nohlsearch
   call s:set_puzzle_options()
 endfunction
