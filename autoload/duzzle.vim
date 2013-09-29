@@ -258,10 +258,11 @@ function! s:go_next_room() " {{{
 endfunction
 " }}}
 
-function! s:go_endding()
+function! s:go_endding() " {{{
   call s:show_endding_message()
   call s:enable_allkey()
 endfunction
+" }}}
 
 function! s:show_endding_message() " {{{
   let s:save_modifiable = &l:modifiable
@@ -396,7 +397,7 @@ let s:enable_key_message = {
   \ },
   \ }
 
-function! s:print_enable_keys(keys)
+function! s:print_enable_keys(keys) " {{{
   let keydict = s:build_keydict(a:keys)
 
   call setline(line('$')+1, '[この部屋で使えるコマンド]')
@@ -412,7 +413,7 @@ function! s:print_enable_keys(keys)
     endfor
   endif
 endfunction
-
+" }}}
 
 function! s:draw_lines(lines) " {{{
   let s:save_modifiable = &l:modifiable
