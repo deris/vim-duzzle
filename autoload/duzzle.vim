@@ -119,8 +119,10 @@ endfunction
 
 " Private {{{
 let s:died_times = 0
+let s:default_room_name = 'unknown room'
 let s:default_enable_keys = 'hjkl'
 let s:default_experiment_name = '_'
+let s:default_room_message = '[ルーム名]'
 let s:default_puzzle_message = [
   \ '[ルール]',
   \ '出口(g)まで移動してください。',
@@ -337,6 +339,9 @@ function! s:draw_room() " {{{
   try
     call s:clear_buffer()
     call setline(1, s:current_puzzle['room'])
+    call setline(line('$')+1, '')
+    call setline(line('$')+1, s:default_room_message)
+    call setline(line('$')+1, get(s:current_puzzle, 'name', s:default_room_name))
     call setline(line('$')+1, '')
     call setline(line('$')+1, s:default_puzzle_message)
     call s:print_enable_keys(
