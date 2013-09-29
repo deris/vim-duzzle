@@ -305,11 +305,8 @@ endfunction
 " }}}
 
 function! s:enable_puzzle_key() " {{{
-  if has_key(s:current_puzzle, 'enable_keys')
-    call s:enable_keys(s:current_puzzle['enable_keys'])
-  else
-    call s:enable_keys(s:default_enable_keys)
-  endif
+  call s:enable_keys(
+    \ get(s:current_puzzle, 'enable_keys', s:default_enable_keys))
 endfunction
 " }}}
 
@@ -342,11 +339,8 @@ function! s:draw_room() " {{{
     call setline(1, s:current_puzzle['room'])
     call setline(line('$')+1, '')
     call setline(line('$')+1, s:default_puzzle_message)
-    if has_key(s:current_puzzle, 'enable_keys')
-      call s:print_enable_keys(s:current_puzzle['enable_keys'])
-    else
-      call s:print_enable_keys(s:default_enable_keys)
-    endif
+    call s:print_enable_keys(
+      \ get(s:current_puzzle, 'enable_keys', s:default_enable_keys))
 
     call setline(line('$')+1, '')
     if get(s:current_puzzle,  'disable_key_count', 0)
