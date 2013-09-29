@@ -91,7 +91,8 @@ function! duzzle#check_cursor() " {{{
     call s:go_next_room()
     return 1
   elseif s:char_under_cursor() ==# '-' ||
-    \    s:char_under_cursor() ==# '|'
+    \    s:char_under_cursor() ==# '|' ||
+    \    s:char_under_cursor() ==# '+'
     call s:died_and_go_room_with_message(s:died_message_when_tuch_the_wall)
     return 1
   endif
