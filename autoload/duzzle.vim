@@ -126,7 +126,7 @@ let s:default_room_message = '[ルーム名]'
 let s:default_puzzle_message = [
   \ '[ルール]',
   \ '出口(g)まで移動してください。',
-  \ '壁(|)or(-)に当たると死にます',
+  \ '壁(|)or(-)or(+)に当たると死にます',
   \ '',
   \ ]
 let s:default_puzzle_option_message = [
