@@ -195,7 +195,7 @@ let s:endding_message = [
 nnoremap <expr> <SID>(count)  v:count ? v:count : ''
 
 
-function! s:init_options() " {{{
+function! s:init_puzzle() " {{{
   setlocal noswapfile
   setlocal nomodifiable
   setlocal nolist
@@ -229,7 +229,7 @@ function! s:show_start_message() " {{{
   call s:enable_keys(s:default_enable_keys)
 
   " TODO: dont set puzzle options if start
-  call s:init_options()
+  call s:init_puzzle()
   nnoremap <silent><buffer> <CR>  :<C-u>call <SID>go_room_if_press_start()<CR>
 
   call s:draw_lines(s:start_message)
@@ -294,7 +294,7 @@ function! s:go_room() " {{{
   call s:draw_room()
   call s:move_start_position()
   call s:init_keys()
-  call s:init_options()
+  call s:init_puzzle()
 endfunction
 " }}}
 
