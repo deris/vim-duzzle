@@ -273,6 +273,7 @@ endfunction
 function! s:show_endding_message() " {{{
   let s:save_modifiable = &l:modifiable
   setlocal modifiable
+  setlocal filetype=
   try
     call s:clear_buffer()
     call setline(1, s:endding_message)
