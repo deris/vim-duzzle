@@ -196,15 +196,20 @@ nnoremap <expr> <SID>(count)  v:count ? v:count : ''
 
 
 function! s:init_puzzle() " {{{
+  call s:init_options()
+  setfiletype duzzle
+  let @/ = ''
+  nohlsearch
+  call s:set_puzzle_options()
+endfunction
+" }}}
+
+function! s:init_options() " {{{
   setlocal noswapfile
   setlocal nomodifiable
   setlocal nolist
   setlocal nonumber
   setlocal buftype=nofile
-  setfiletype duzzle
-  let @/ = ''
-  nohlsearch
-  call s:set_puzzle_options()
 endfunction
 " }}}
 
@@ -228,8 +233,7 @@ function! s:show_start_message() " {{{
   call s:disable_allkey()
   call s:enable_keys(s:default_enable_keys)
 
-  " TODO: dont set puzzle options if start
-  call s:init_puzzle()
+  call s:init_options()
   nnoremap <silent><buffer> <CR>  :<C-u>call <SID>go_room_if_press_start()<CR>
 
   call s:draw_lines(s:start_message)
