@@ -9,10 +9,10 @@ syntax match   duzzleEnd    /\<g\>/  contained
 
 syntax region DuzzleMap  start=/\%^/ end=/\[ルーム名\]/ contains=duzzleField,duzzleWall,duzzleStart,duzzleEnd
 
-highlight duzzleFieldHi  guibg=#ffccff ctermbg=red
-highlight duzzleWallHi   guibg=#666666 ctermbg=green
+highlight duzzleFieldHi  guibg=#ffccff ctermbg=white
+highlight duzzleWallHi   guibg=#666666 ctermbg=gray
 highlight duzzleStartHi  guibg=blue    ctermbg=blue
-highlight duzzleEndHi    guibg=red     ctermbg=yellow
+highlight duzzleEndHi    guibg=red     ctermbg=red
 
 hi def link duzzleField  duzzleFieldHi
 hi def link duzzleWall   duzzleWallHi
