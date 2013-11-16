@@ -210,6 +210,7 @@ function! s:init_options() " {{{
   setlocal nolist
   setlocal nonumber
   setlocal buftype=nofile
+  setlocal matchpairs=(:),{:},[:]
 endfunction
 " }}}
 
