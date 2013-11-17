@@ -109,6 +109,11 @@ function! duzzle#add_puzzle(experiment_name, puzzle) " {{{
 endfunction
 " }}}
 
+function! duzzle#puzzle_list(experiment_name) " {{{
+  return deepcopy(get(s:experiments, a:experiment_name, []))
+endfunction
+" }}}
+
 function! duzzle#init_keys() " {{{
   call s:init_keys()
 endfunction
