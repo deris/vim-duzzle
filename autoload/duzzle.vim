@@ -459,11 +459,11 @@ function! s:disable_key_if_limit(key, mode) " {{{
     return
   endif
 
-  let s:current_key_limit[a:mode][a:key] -= 1
   if s:current_key_limit[a:mode][a:key] <= 0
     call s:noremap_buffer(a:key, '<Nop>', a:mode)
     return
   endif
+  let s:current_key_limit[a:mode][a:key] -= 1
 
   execute 'normal! ' . (v:count == 0 ? '' : v:count) . a:key
 endfunction
