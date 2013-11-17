@@ -455,7 +455,6 @@ endfunction
 function! s:disable_key_if_limit(key, mode) " {{{
   if !has_key(s:current_key_limit, a:mode) ||
     \!has_key(s:current_key_limit[a:mode], a:key)
-    call s:noremap_buffer(a:key, '<Nop>', a:mode)
     return
   endif
 
