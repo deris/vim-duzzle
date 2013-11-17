@@ -664,6 +664,45 @@ call duzzle#add_puzzle('_', {
   \ ],
   \ })
 
+call duzzle#add_puzzle('_', {
+  \ 'name' : 'forty first room',
+  \ 'enable_keys' : 'hjkl',
+  \ 'limit_key_use' : {
+  \   'n': {
+  \     'j': 2,
+  \     'l': 6,
+  \   },
+  \ },
+  \ 'room' : [
+  \   '+--------+',
+  \   '|s       |',
+  \   '|        |',
+  \   '|        |',
+  \   '|       g|',
+  \   '+--------+',
+  \ ],
+  \ })
+
+call duzzle#add_puzzle('_', {
+  \ 'name' : 'forty second room',
+  \ 'enable_keys' : 'hjkl',
+  \ 'limit_key_use' : {
+  \   'n': {
+  \     'j': 1,
+  \     'l': 1,
+  \   },
+  \ },
+  \ 'room' : [
+  \   '+--------+',
+  \   '|s       |',
+  \   '+------  |',
+  \   '|        |',
+  \   '|  ------+',
+  \   '|       g|',
+  \   '+--------+',
+  \ ],
+  \ })
+
 " TODO:lk%を使い、kも使わないと脱出できないroomの作成
 " TODO:使用できるkeyを極限まで制限することでpuzzle性が増すようなroomの作成
 " TODO:巨大マップで、クリア難易度が高いroomの作成
