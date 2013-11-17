@@ -157,11 +157,14 @@ let s:current_experiment_name = s:default_experiment_name
 let s:current_experiment = []
 let s:current_puzzle_number = 0
 let s:current_puzzle = {}
-let duzzle_dir = split(globpath(&runtimepath, 'autoload/duzzle'), '\n')
-let puzzle_files = split(glob(duzzle_dir[0].'/*.vim'), '\n')
-for puzzle_file in puzzle_files
-  execute 'source ' . puzzle_file
+let s:duzzle_dir = split(globpath(&runtimepath, 'autoload/duzzle'), '\n')
+let s:puzzle_files = split(glob(s:duzzle_dir[0].'/*.vim'), '\n')
+for s:puzzle_file in s:puzzle_files
+  execute 'source ' . s:puzzle_file
 endfor
+unlet s:puzzle_file
+unlet s:puzzle_files
+unlet s:duzzle_dir
 
 let s:died_message_when_tuch_the_wall = "あなたは死にました。あなたが死ぬのは %s回目です"
 let s:died_message_when_out_of_area = "あなたはこのエリアに移動出来ません。" . s:died_message_when_tuch_the_wall
