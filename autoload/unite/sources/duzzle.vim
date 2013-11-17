@@ -55,4 +55,10 @@ function! s:source.gather_candidates(args, context)
   return result
 endfunction
 
+function! s:source.complete(args, context, arglead, cmdline, cursorpos)
+  let experiments = duzzle#experiment_names()
+
+  return filter(experiments, "stridx(v:val, '".a:arglead."') == 0")
+endfunction
+
 " vim: foldmethod=marker
