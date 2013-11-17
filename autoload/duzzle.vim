@@ -445,6 +445,11 @@ endfunction
 " }}}
 
 function! s:enable_key_with_limit(key, mode) " {{{
+  if !has_key(s:current_key_limit, a:mode) ||
+    \!has_key(s:current_key_limit[a:mode], a:key)
+    return
+  endif
+
   call s:noremap_buffer(
     \ a:key,
     \ ':<C-u>call <SID>disable_key_if_limit("'.a:key.'", "'.a:mode.'")<CR>',
@@ -453,11 +458,6 @@ endfunction
 " }}}
 
 function! s:disable_key_if_limit(key, mode) " {{{
-  if !has_key(s:current_key_limit, a:mode) ||
-    \!has_key(s:current_key_limit[a:mode], a:key)
-    return
-  endif
-
   if s:current_key_limit[a:mode][a:key] <= 0
     call s:noremap_buffer(a:key, '<Nop>', a:mode)
     return
