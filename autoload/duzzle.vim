@@ -114,6 +114,11 @@ function! duzzle#puzzle_list(experiment_name) " {{{
 endfunction
 " }}}
 
+function! duzzle#experiment_names() " {{{
+  return keys(s:experiments)
+endfunction
+" }}}
+
 function! duzzle#init_keys() " {{{
   call s:init_keys()
 endfunction

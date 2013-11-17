@@ -39,14 +39,15 @@ let s:source = {
 function! s:source.gather_candidates(args, context)
   let result = []
 
-  let puzzles = duzzle#puzzle_list('_')
+  let experiment = get(a:args, 0, '_')
+  let puzzles = duzzle#puzzle_list(experiment)
   let i = 0
   for puzzle in puzzles
     call add(result, {
       \ 'word': get(puzzle, 'name', string(i)),
       \ 'kind': 'command',
       \ 'source': 'duzzle',
-      \ 'action__command': "call duzzle#start('_', '".string(i)."')",
+      \ 'action__command': "call duzzle#start('".experiment."', '".string(i)."')",
       \ })
     let i += 1
   endfor
