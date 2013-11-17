@@ -192,9 +192,6 @@ let s:endding_message = [
   \ ]
 
 
-nnoremap <expr> <SID>(count)  v:count ? v:count : ''
-
-
 function! s:init_puzzle() " {{{
   call s:init_options()
   setfiletype duzzle
@@ -450,8 +447,7 @@ endfunction
 function! s:enable_key_with_limit(key, mode) " {{{
   call s:noremap_buffer(
     \ a:key,
-    \ ':<C-u>call <SID>disable_key_if_limit("'.a:key.'", "'.a:mode.'")<CR>'
-    \   .'<SID>(count)'.a:key,
+    \ ':<C-u>call <SID>disable_key_if_limit("'.a:key.'", "'.a:mode.'")<CR>',
     \ a:mode)
 endfunction
 " }}}
@@ -466,7 +462,10 @@ function! s:disable_key_if_limit(key, mode) " {{{
   let s:current_key_limit[a:mode][a:key] -= 1
   if s:current_key_limit[a:mode][a:key] <= 0
     call s:noremap_buffer(a:key, '<Nop>', a:mode)
+    return
   endif
+
+  execute 'normal! ' . (v:count == 0 ? '' : v:count) . a:key
 endfunction
 " }}}
 
