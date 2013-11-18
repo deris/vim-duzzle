@@ -362,6 +362,8 @@ function! s:draw_room() " {{{
     call setline(line('$')+1, s:default_puzzle_message)
     call s:print_enable_keys(
       \ get(s:current_puzzle, 'enable_keys', s:default_enable_keys))
+    call s:print_limit_key_use(
+      \ get(s:current_puzzle, 'limit_key_use', {}))
 
     call setline(line('$')+1, '')
     if get(s:current_puzzle,  'disable_key_count', 0)
@@ -425,6 +427,27 @@ function! s:print_enable_keys(keys) " {{{
     call setline(line('$')+1, '[この部屋でdの後に許されているコマンド]')
     for key in keydict['o']
       call setline(line('$')+1, s:enable_key_message['o'][key])
+    endfor
+  endif
+endfunction
+" }}}
+
+function! s:print_limit_key_use(limit_key_use) " {{{
+  if empty(a:limit_key_use)
+    return
+  endif
+
+  call setline(line('$')+1, '')
+  call setline(line('$')+1, '[コマンドの制限回数]')
+  for [key, cnt] in items(get(a:limit_key_use, 'n', {}))
+    call setline(line('$')+1, key.':'.cnt.'回')
+  endfor
+
+  if has_key(a:limit_key_use, 'o')
+    call setline(line('$')+1, '')
+    call setline(line('$')+1, '[この部屋でdの後に許されているコマンドの制限回数]')
+    for [key, cnt] in items(get(a:limit_key_use, 'o', {}))
+      call setline(line('$')+1, key.':'.cnt.'回')
     endfor
   endif
 endfunction
