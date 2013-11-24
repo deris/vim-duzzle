@@ -569,6 +569,7 @@ call duzzle#add_puzzle('_', {
 call duzzle#add_puzzle('_', {
   \ 'name' : 'thirty fifth room',
   \ 'enable_keys' : 'jl',
+  \ 'disable_key_count' : 1,
   \ 'room' : [
   \   '+---------+',
   \   '|s        |',
@@ -582,6 +583,7 @@ call duzzle#add_puzzle('_', {
 call duzzle#add_puzzle('_', {
   \ 'name' : 'thirty sixth room',
   \ 'enable_keys' : 'jl',
+  \ 'disable_key_count' : 1,
   \ 'room' : [
   \   '+-------------------------------+',
   \   '|s        ++++   ++++   ++++    |',
@@ -602,6 +604,7 @@ call duzzle#add_puzzle('_', {
 call duzzle#add_puzzle('_', {
   \ 'name' : 'thirty seventh room',
   \ 'enable_keys' : 'jkl}$',
+  \ 'disable_key_count' : 1,
   \ 'room' : [
   \   '+-------------------------------+',
   \   '|s        ++++   ++++   ++++    |',
@@ -624,6 +627,7 @@ call duzzle#add_puzzle('_', {
 call duzzle#add_puzzle('_', {
   \ 'name' : 'thirty eighth room',
   \ 'enable_keys' : 'l%',
+  \ 'disable_key_count' : 1,
   \ 'room' : [
   \   '+---------------+',
   \   '|s (  [  (  + { |',
@@ -634,6 +638,7 @@ call duzzle#add_puzzle('_', {
 
 call duzzle#add_puzzle('_', {
   \ 'name' : 'thirty nineth room',
+  \ 'disable_key_count' : 1,
   \ 'enable_keys' : 'l%',
   \ 'room' : [
   \   '+------------------+',
@@ -651,6 +656,7 @@ call duzzle#add_puzzle('_', {
 call duzzle#add_puzzle('_', {
   \ 'name' : 'fortieth room',
   \ 'enable_keys' : 'l%',
+  \ 'disable_key_count' : 1,
   \ 'room' : [
   \   '+------------------+',
   \   '|s(()()())(((()((((|',
