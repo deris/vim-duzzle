@@ -208,9 +208,7 @@ endfunction
 " }}}
 
 function! s:go_room_if_press_start() " {{{
-  let line = getline('.')
-
-  if line !~ '\[Press Enter\]'
+  if line('.') != line('$')
     return
   endif
 
