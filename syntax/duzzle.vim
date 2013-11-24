@@ -7,7 +7,7 @@ syntax match   duzzleWall   /[-|+]/  contained
 syntax match   duzzleStart  /\<s\>/  contained
 syntax match   duzzleEnd    /\<g\>/  contained
 
-syntax region DuzzleMap  start=/\%^/ end=/\ze\[ルーム名\]/ contains=duzzleField,duzzleWall,duzzleStart,duzzleEnd
+syntax region DuzzleMap  start=/\%^/ end=/^\ze\[.*\]/ contains=duzzleField,duzzleWall,duzzleStart,duzzleEnd
 
 highlight duzzleFieldHi  guibg=lightcyan ctermbg=lightcyan
 highlight duzzleWallHi   guibg=dimgray   ctermbg=gray
