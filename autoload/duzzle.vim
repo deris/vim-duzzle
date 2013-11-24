@@ -25,6 +25,18 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
+let s:V = vital#of('vim-duzzle')
+let s:M = s:V.import('Locale.Message')
+let s:message_path = 'message/%s.txt'
+let s:message = s:M.new(s:message_path)
+let s:start_message = s:message.get('start_message')
+if type(s:start_message) == type('') &&
+  \s:start_message ==# 'start_message'
+  call s:message.load('ja')
+endif
+
+
+
 " Public API {{{
 function! duzzle#start(...) " {{{
   " TODO:引数チェック関数化
@@ -84,7 +96,7 @@ function! duzzle#check_cursor() " {{{
     return 0
   endif
   if line('.') > len(s:current_puzzle['room'])
-    call s:died_and_go_room_with_message(s:died_message_when_out_of_area)
+    call s:died_and_go_room_with_message(s:message.get('died_message_when_out_of_area'))
     return 1
   endif
   if s:char_under_cursor() ==# 'g'
@@ -93,7 +105,7 @@ function! duzzle#check_cursor() " {{{
   elseif s:char_under_cursor() ==# '-' ||
     \    s:char_under_cursor() ==# '|' ||
     \    s:char_under_cursor() ==# '+'
-    call s:died_and_go_room_with_message(s:died_message_when_tuch_the_wall)
+    call s:died_and_go_room_with_message(s:message.get('died_message_when_touch_the_wall'))
     return 1
   endif
 
@@ -129,33 +141,8 @@ endfunction
 
 " Private {{{
 let s:died_times = 0
-let s:default_room_name = 'unknown room'
 let s:default_enable_keys = 'hjkl'
 let s:default_experiment_name = '_'
-let s:default_room_message = '[ルーム名]'
-let s:default_puzzle_message = [
-  \ '[ルール]',
-  \ '出口(g)まで移動してください。',
-  \ '壁(|)or(-)or(+)に当たると死にます',
-  \ '',
-  \ ]
-let s:default_puzzle_option_message = [
-  \ '[この部屋で使えるコマンド]',
-  \ 'h:左に進む',
-  \ 'j:下に進む',
-  \ 'k:上に進む',
-  \ 'l:右に進む',
-  \ ]
-let s:default_disable_key_count_message = [
-  \ '[カウント指定無効部屋]',
-  \ 'この部屋はコマンド実行前に数値を入力することで',
-  \ 'その回数コマンドを実行するカウント指定を利用することができません',
-  \ ]
-let s:default_enable_key_count_message = [
-  \ '[カウント指定有効部屋]',
-  \ 'この部屋はコマンド実行前に数値を入力することで',
-  \ 'その回数コマンドを実行するカウント指定を利用することができます。',
-  \ ]
 
 let s:experiments = {}
 let s:current_experiment_name = s:default_experiment_name
@@ -171,39 +158,8 @@ unlet s:puzzle_file
 unlet s:puzzle_files
 unlet s:duzzle_dir
 
-let s:died_message_when_tuch_the_wall = "あなたは死にました。あなたが死ぬのは %s回目です"
-let s:died_message_when_out_of_area = "あなたはこのエリアに移動出来ません。" . s:died_message_when_tuch_the_wall
-
 let s:current_key_limit = {}
 let s:puzzle_started = 0
-let s:start_message = [
-  \ "おめでとうございます",
-  \ "あなたは実験の被験者に選ばれました",
-  \ "",
-  \ "さぁ、ゲームを始めましょう",
-  \ "あなたは壁で囲まれた部屋の中に閉じ込められました",
-  \ "あなたに課されたことはただひとつ",
-  \ "部屋ごとに存在するゴールまでたどり着くことです",
-  \ "",
-  \ "ルールは部屋それぞれですが、以下のルールは基本的にすべての部屋共通です",
-  \ "* 部屋にはスタート地点がある",
-  \ "* 部屋には出口がある",
-  \ "* 部屋の壁にさわると死にスタート地点に戻る",
-  \ "",
-  \ "まぁやっていくうちにわかっていくでしょう",
-  \ "あなたが間違った選択をすると死ぬこともあるのでご注意を",
-  \ "なお、どうしても現実に戻りたい場合、'Q'を押下することで",
-  \ "強制的に現実に戻ることができます",
-  \ "",
-  \ "それでは実験を開始してください",
-  \ "",
-  \ "[Press Enter]",
-  \ ]
-let s:endding_message = [
-  \ "残念ですがこれで実験は終わりです。お疲れ様でした。次の実験でまたお会いしましょう",
-  \ "press Q for quit.",
-  \ ]
-
 
 function! s:init_puzzle() " {{{
   call s:init_options()
@@ -247,7 +203,7 @@ function! s:show_start_message() " {{{
   call s:init_options()
   nnoremap <silent><buffer> <CR>  :<C-u>call <SID>go_room_if_press_start()<CR>
 
-  call s:draw_lines(s:start_message)
+  call s:draw_lines(s:message.get('start_message'))
 endfunction
 " }}}
 
@@ -287,7 +243,7 @@ function! s:show_endding_message() " {{{
   setlocal filetype=
   try
     call s:clear_buffer()
-    call setline(1, s:endding_message)
+    call setline(1, s:message.get('endding_message'))
   finally
     let &l:modifiable = s:save_modifiable
   endtry
@@ -356,10 +312,10 @@ function! s:draw_room() " {{{
     call s:clear_buffer()
     call setline(1, s:current_puzzle['room'])
     call setline(line('$')+1, '')
-    call setline(line('$')+1, s:default_room_message)
-    call setline(line('$')+1, get(s:current_puzzle, 'name', s:default_room_name))
+    call setline(line('$')+1, s:message.get('room_title'))
+    call setline(line('$')+1, get(s:current_puzzle, 'name', s:message.get('unknown_room_name')))
     call setline(line('$')+1, '')
-    call setline(line('$')+1, s:default_puzzle_message)
+    call setline(line('$')+1, s:message.get('rule_of_room'))
     call s:print_enable_keys(
       \ get(s:current_puzzle, 'enable_keys', s:default_enable_keys))
     call s:print_limit_key_use(
@@ -367,9 +323,9 @@ function! s:draw_room() " {{{
 
     call setline(line('$')+1, '')
     if get(s:current_puzzle,  'disable_key_count', 0)
-      call setline(line('$')+1, s:default_disable_key_count_message)
+      call setline(line('$')+1, s:message.get('disable_command_count'))
     else
-      call setline(line('$')+1, s:default_enable_key_count_message)
+      call setline(line('$')+1, s:message.get('enable_command_count'))
     endif
   finally
     let &l:modifiable = s:save_modifiable
@@ -377,56 +333,20 @@ function! s:draw_room() " {{{
 endfunction
 " }}}
 
-let s:enable_key_message = {
-  \ 'n' : {
-  \   'h' : 'h:左に進む',
-  \   'j' : 'j:下に進む',
-  \   'k' : 'k:上に進む',
-  \   'l' : 'l:右に進む',
-  \   'w' : 'w:1単語前方に進む',
-  \   'b' : 'b:1単語後方に進む',
-  \   'e' : 'e:1単語前方の単語の終わりに進む',
-  \   'ge': 'ge:1単語後方の単語の終わりに進む',
-  \   'f' : 'f:続いて文字を入力することで右に向かって入力文字まで移動する',
-  \   'F' : 'F:続いて文字を入力することで左に向かって入力文字まで移動する',
-  \   't' : 't:続いて文字を入力することで右に向かって入力文字の手前まで移動する',
-  \   'T' : 'T:続いて文字を入力することで左に向かって入力文字の手前まで移動する',
-  \   ';' : ';:一個前のf,F,t,Tを繰り返す(同じ方向に移動)',
-  \   ',' : ',:一個前のf,F,t,Tを繰り返す(逆方向に移動)',
-  \   '^' : '^:その行の最初の非空白文字に移動する',
-  \   '0' : '0:その行の最初に移動する',
-  \   '$' : '$:その行の最後に移動する',
-  \   'g_': 'g_:その行の最後の非空白文字に移動する',
-  \   '{' : '{:上方向に空行が出てくる位置まで移動(段落後方に)',
-  \   '}' : '}:下方向に空行が出てくる位置まで移動(段落前方に)',
-  \   '/' : '/:前方検索する',
-  \   '?' : '?:後方検索する',
-  \   '*' : '*:カーソル位置の単語を前方検索する',
-  \   '#' : '#:カーソル位置の単語を後方検索する',
-  \   'n' : 'n:最後の検索を繰り返す',
-  \   'N' : 'N:最後の逆方向に検索を繰り返す',
-  \   '%' : '%:対応する括弧に移動する',
-  \   'd' : 'd:続けて入力したコマンドの位置まで削除する',
-  \ },
-  \ 'o' : {
-  \   'f' : 'f:続いて文字を入力することで右に向かって入力文字まで移動する',
-  \   't' : 't:続いて文字を入力することで右に向かって入力文字の手前まで移動する',
-  \ },
-  \ }
-
 function! s:print_enable_keys(keys) " {{{
   let keydict = s:build_keydict(a:keys)
+  let enable_command = s:message.get('enable_command')
 
-  call setline(line('$')+1, '[この部屋で使えるコマンド]')
+  call setline(line('$')+1, s:message.get('available_normal_command'))
   for key in get(keydict, 'n', [])
-    call setline(line('$')+1, s:enable_key_message['n'][key])
+    call setline(line('$')+1, enable_command['n'][key])
   endfor
 
   if has_key(keydict, 'o')
     call setline(line('$')+1, '')
-    call setline(line('$')+1, '[この部屋でdの後に許されているコマンド]')
+    call setline(line('$')+1, s:message.get('available_operator_command'))
     for key in keydict['o']
-      call setline(line('$')+1, s:enable_key_message['o'][key])
+      call setline(line('$')+1, enable_command['o'][key])
     endfor
   endif
 endfunction
@@ -438,16 +358,16 @@ function! s:print_limit_key_use(limit_key_use) " {{{
   endif
 
   call setline(line('$')+1, '')
-  call setline(line('$')+1, '[コマンドの制限回数]')
+  call setline(line('$')+1, s:message.get('limit_of_normal_command_count'))
   for [key, cnt] in items(get(a:limit_key_use, 'n', {}))
-    call setline(line('$')+1, key.':'.cnt.'回')
+    call setline(line('$')+1, key.':'.cnt)
   endfor
 
   if has_key(a:limit_key_use, 'o')
     call setline(line('$')+1, '')
-    call setline(line('$')+1, '[この部屋でdの後に許されているコマンドの制限回数]')
+    call setline(line('$')+1, s:message.get('limit_of_operator_command_count'))
     for [key, cnt] in items(get(a:limit_key_use, 'o', {}))
-      call setline(line('$')+1, key.':'.cnt.'回')
+      call setline(line('$')+1, key.':'.cnt)
     endfor
   endif
 endfunction
