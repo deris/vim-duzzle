@@ -25,7 +25,7 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-let s:V = vital#of('vim-duzzle')
+let s:V = vital#of('vim_duzzle')
 let s:M = s:V.import('Locale.Message')
 let s:message_path = 'message/%s.txt'
 let s:message = s:M.new(s:message_path)
