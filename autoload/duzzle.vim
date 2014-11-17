@@ -406,7 +406,7 @@ function! s:enable_key_with_limit(key, mode) " {{{
 
   call s:noremap_buffer(
     \ a:key,
-    \ ':<C-u>call <SID>disable_key_if_limit("'.a:key.'", "'.a:mode.'")<CR>',
+    \ printf(':<C-u>call <SID>disable_key_if_limit(''%s'', ''%s'')<CR>', a:key, a:mode)
     \ a:mode)
 endfunction
 " }}}
@@ -418,7 +418,7 @@ function! s:disable_key_if_limit(key, mode) " {{{
   endif
   let s:current_key_limit[a:mode][a:key] -= 1
 
-  execute 'normal! ' . (v:count == 0 ? '' : v:count) . a:key
+  execute printf('normal! %s%s', (v:count == 0 ? '' : v:count), a:key)
 endfunction
 " }}}
 
@@ -590,7 +590,7 @@ function! s:noremap_buffer(lhs, rhs, modes) " {{{
     let modes = a:modes
   endif
   for mode in modes
-    execute mode.'noremap <silent><buffer> '.a:lhs.' '.a:rhs
+    execute printf('%snoremap <silent><buffer> %s %s', mode, a:lhs, a:rhs)
   endfor
 endfunction
 " }}}
