@@ -469,11 +469,7 @@ endfunction
 " }}}
 
 function! s:split2char_if_str(arg) " {{{
-  if type(a:arg) == type('')
-    return split(a:arg, '\zs')
-  else
-    return a:arg
-  endif
+  return type(a:arg) == type('') ? split(a:arg, '\zs') : a:arg
 endfunction
 " }}}
 
