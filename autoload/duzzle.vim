@@ -100,12 +100,10 @@ function! duzzle#check_cursor() " {{{
     call s:died_and_go_room_with_message(s:message.get('died_message_when_out_of_area'))
     return 1
   endif
-  if s:char_under_cursor() ==# 'g'
+  if s:is_goal_under_cursor()
     call s:go_next_room()
     return 1
-  elseif s:char_under_cursor() ==# '-' ||
-    \    s:char_under_cursor() ==# '|' ||
-    \    s:char_under_cursor() ==# '+'
+  elseif s:is_wall_under_cursor()
     call s:died_and_go_room_with_message(s:message.get('died_message_when_touch_the_wall'))
     return 1
   endif
@@ -437,6 +435,18 @@ endfunction
 
 function! s:char_under_cursor() " {{{
   return getline('.')[col('.')-1]
+endfunction
+" }}}
+
+function! s:is_goal_under_cursor() " {{{
+  return s:char_under_cursor() ==# 'g'
+endfunction
+" }}}
+
+function! s:is_wall_under_cursor() " {{{
+  return s:char_under_cursor() ==# '-' ||
+    \    s:char_under_cursor() ==# '|' ||
+    \    s:char_under_cursor() ==# '+'
 endfunction
 " }}}
 
