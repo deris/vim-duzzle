@@ -113,9 +113,7 @@ endfunction
 " }}}
 
 function! duzzle#add_puzzle(experiment_name, puzzle) " {{{
-  if !has_key(s:experiments, a:experiment_name)
-    let s:experiments[a:experiment_name] = []
-  endif
+  let s:experiments[a:experiment_name] = get(s:experiments, a:experiment_name, [])
   call add(s:experiments[a:experiment_name], a:puzzle)
 endfunction
 " }}}
@@ -180,11 +178,7 @@ endfunction
 " }}}
 
 function! s:set_puzzle_options() " {{{
-  if !has_key(s:current_puzzle, 'options')
-    return
-  endif
-
-  for option in s:current_puzzle['options']
+  for option in get(s:current_puzzle, 'options', [])
     execute option
   endfor
 endfunction
@@ -378,11 +372,7 @@ endfunction
 " }}}
 
 function! s:enable_keys_with_limit() " {{{
-  if !has_key(s:current_puzzle, 'limit_key_use')
-    return
-  endif
-
-  let s:current_key_limit = deepcopy(s:current_puzzle['limit_key_use'])
+  let s:current_key_limit = deepcopy(get(s:current_puzzle, 'limit_key_use', {}))
 
   for [mode, keydict] in items(s:current_key_limit)
     for [key, cnt] in items(keydict)
