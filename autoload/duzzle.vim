@@ -390,7 +390,7 @@ function! s:enable_key_with_limit(key, mode) " {{{
 
   call s:noremap_buffer(
     \ a:key,
-    \ printf(':<C-u>call <SID>disable_key_if_limit(''%s'', ''%s'')<CR>', a:key, a:mode)
+    \ printf(':<C-u>call <SID>disable_key_if_limit(''%s'', ''%s'')<CR>', a:key, a:mode),
     \ a:mode)
 endfunction
 " }}}
