@@ -40,14 +40,14 @@ endif
 
 " Public API {{{
 function! duzzle#start(...) " {{{
-  " TODO:引数チェック関数化
+  " TODO: extract function to check parameter
   if a:0 > 2
     call s:EchoError('Error:Too much Argument.')
     return
   endif
 
   if a:0 == 0
-    " 前回の続き
+    " the last continuation
   elseif a:0 == 1
     if a:1 !~ '^\d\+$'
       call s:EchoError('Error:Invalid Argument:'.a:1)
@@ -82,7 +82,7 @@ function! duzzle#start(...) " {{{
   let s:current_experiment = s:experiments[s:current_experiment_name]
   let s:current_puzzle = s:current_experiment[s:current_puzzle_number]
 
-  " TODO: ウィンドウ作成コマンドの変更
+  " TODO: customize to change window create command
   tabnew duzzle
   if s:is_first_start()
     call s:show_start_message()
@@ -297,7 +297,7 @@ endfunction
 function! s:move_start_position() " {{{
   let res = search('s', 'w')
   if res == 0
-    " TODO:例外処理
+    " TODO: exception
     echoerr 'error: there is no start position'
     return
   endif
