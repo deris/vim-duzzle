@@ -26,9 +26,10 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 let s:V = vital#of('vim_duzzle')
-let s:M = s:V.import('Locale.Message')
+let s:LM = s:V.import('Locale.Message')
+let s:VM = s:V.import('Vim.Message')
 let s:message_path = 'message/%s.txt'
-let s:message = s:M.new(s:message_path)
+let s:message = s:LM.new(s:message_path)
 let s:start_message = s:message.get('start_message')
 if type(s:start_message) == type('') &&
   \s:start_message ==# 'start_message'
@@ -597,17 +598,13 @@ endfunction
 
 function! s:EchoWarning(message) " {{{
   redraw!
-  echohl WarningMsg
-  echo a:message
-  echohl None
+  call s:VM.echomsg('WarningMsg', a:message)
 endfunction
 " }}}
 
 function! s:EchoError(message) " {{{
   redraw!
-  echohl ErrorMsg
-  echomsg a:message
-  echohl None
+  call s:VM.echomsg('ErrorMsg', a:message)
 endfunction
 " }}}
 
