@@ -84,7 +84,7 @@ function! duzzle#start(...) " {{{
 
   " TODO: customize to change window create command
   tabnew duzzle
-  if s:is_first_start()
+  if !s:puzzle_started
     call s:show_start_message()
   else
     call s:go_room()
@@ -189,11 +189,6 @@ function! s:set_puzzle_options() " {{{
   for option in s:current_puzzle['options']
     execute option
   endfor
-endfunction
-" }}}
-
-function! s:is_first_start() " {{{
-  return s:puzzle_started == 0
 endfunction
 " }}}
 
