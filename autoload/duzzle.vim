@@ -565,7 +565,7 @@ endfunction
 " }}}
 
 function! s:map_quit_key() " {{{
-  call s:noremap_buffer('Q', ':<C-u>bd!<CR>', 'n')
+  call s:noremap_buffer('Q', ':<C-u>bwipeout!<CR>', 'n')
 endfunction
 " }}}
 
