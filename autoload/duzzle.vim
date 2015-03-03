@@ -294,22 +294,22 @@ function! s:draw_room() " {{{
   setlocal modifiable
   try
     call s:clear_buffer()
-    call setline(1, s:current_puzzle['room'])
-    call setline(line('$')+1, '')
-    call setline(line('$')+1, s:message.get('room_title'))
-    call setline(line('$')+1, get(s:current_puzzle, 'name', s:message.get('unknown_room_name')))
-    call setline(line('$')+1, '')
-    call setline(line('$')+1, s:message.get('rule_of_room'))
+    call s:add_line(s:current_puzzle['room'])
+    call s:add_line('')
+    call s:add_line(s:message.get('room_title'))
+    call s:add_line(get(s:current_puzzle, 'name', s:message.get('unknown_room_name')))
+    call s:add_line('')
+    call s:add_line(s:message.get('rule_of_room'))
     call s:print_enable_keys(
       \ get(s:current_puzzle, 'enable_keys', s:default_enable_keys))
     call s:print_limit_key_use(
       \ get(s:current_puzzle, 'limit_key_use', {}))
 
-    call setline(line('$')+1, '')
+    call s:add_line('')
     if get(s:current_puzzle,  'disable_key_count', 0)
-      call setline(line('$')+1, s:message.get('disable_command_count'))
+      call s:add_line(s:message.get('disable_command_count'))
     else
-      call setline(line('$')+1, s:message.get('enable_command_count'))
+      call s:add_line(s:message.get('enable_command_count'))
     endif
   finally
     let &l:modifiable = s:save_modifiable
@@ -321,16 +321,16 @@ function! s:print_enable_keys(keys) " {{{
   let keydict = s:build_keydict(a:keys)
   let enable_command = s:message.get('enable_command')
 
-  call setline(line('$')+1, s:message.get('available_normal_command'))
+  call s:add_line(s:message.get('available_normal_command'))
   for key in get(keydict, 'n', [])
-    call setline(line('$')+1, enable_command['n'][key])
+    call s:add_line(enable_command['n'][key])
   endfor
 
   if has_key(keydict, 'o')
-    call setline(line('$')+1, '')
-    call setline(line('$')+1, s:message.get('available_operator_command'))
+    call s:add_line('')
+    call s:add_line(s:message.get('available_operator_command'))
     for key in keydict['o']
-      call setline(line('$')+1, enable_command['o'][key])
+      call s:add_line(enable_command['o'][key])
     endfor
   endif
 endfunction
@@ -341,17 +341,17 @@ function! s:print_limit_key_use(limit_key_use) " {{{
     return
   endif
 
-  call setline(line('$')+1, '')
-  call setline(line('$')+1, s:message.get('limit_of_normal_command_count'))
+  call s:add_line('')
+  call s:add_line(s:message.get('limit_of_normal_command_count'))
   for [key, cnt] in items(get(a:limit_key_use, 'n', {}))
-    call setline(line('$')+1, key.':'.cnt)
+    call s:add_line(key.':'.cnt)
   endfor
 
   if has_key(a:limit_key_use, 'o')
-    call setline(line('$')+1, '')
-    call setline(line('$')+1, s:message.get('limit_of_operator_command_count'))
+    call s:add_line('')
+    call s:add_line(s:message.get('limit_of_operator_command_count'))
     for [key, cnt] in items(get(a:limit_key_use, 'o', {}))
-      call setline(line('$')+1, key.':'.cnt)
+      call s:add_line(key.':'.cnt)
     endfor
   endif
 endfunction
@@ -362,7 +362,7 @@ function! s:draw_lines(lines) " {{{
   setlocal modifiable
   try
     call s:clear_buffer()
-    call setline(1, a:lines)
+    call s:add_line(a:lines)
   finally
     let &l:modifiable = s:save_modifiable
   endtry
@@ -416,6 +416,16 @@ endfunction
 " }}}
 
 " Tools {{{2
+function! s:add_line(str) " {{{
+  let lastline = line('$')
+  if lastline == 1
+    call setline(1, a:str)
+  else
+    call setline(line('$')+1, a:str)
+  endif
+endfunction
+" }}}
+
 function! s:clear_buffer() " {{{
   %delete
 endfunction
