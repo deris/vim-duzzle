@@ -163,7 +163,6 @@ function! s:init_puzzle() " {{{
   call s:init_options()
   setfiletype duzzle
   let @/ = ''
-  nohlsearch
   call s:set_puzzle_options()
 endfunction
 " }}}
@@ -175,6 +174,11 @@ function! s:init_options() " {{{
   setlocal nonumber
   setlocal buftype=nofile
   setlocal matchpairs=(:),{:},[:]
+  setlocal colorcolumn=
+  setlocal nocursorcolumn
+  setlocal nocursorline
+  setlocal nospell
+  nohlsearch
 endfunction
 " }}}
 
