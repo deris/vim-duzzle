@@ -22,7 +22,7 @@
     '',
     '[Press Enter]',
     ],
-  'endding_message' : [
+  'ending_message' : [
     'Sorry experiment This is the end. Was cheers for good work. We''ll see you again in the next experiment',
     'press Q for quit.',
     ],

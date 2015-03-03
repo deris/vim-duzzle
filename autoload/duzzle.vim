@@ -212,7 +212,7 @@ endfunction
 
 function! s:go_next_room() " {{{
   if s:is_last_puzzle()
-    call s:go_endding()
+    call s:go_ending()
     return
   endif
 
@@ -222,15 +222,15 @@ function! s:go_next_room() " {{{
 endfunction
 " }}}
 
-function! s:go_endding() " {{{
-  call s:show_endding_message()
+function! s:go_ending() " {{{
+  call s:show_ending_message()
   call s:enable_allkey()
 endfunction
 " }}}
 
-function! s:show_endding_message() " {{{
+function! s:show_ending_message() " {{{
   setlocal filetype=
-  call s:draw_lines(s:message.get('endding_message'))
+  call s:draw_lines(s:message.get('ending_message'))
 endfunction
 " }}}
 
