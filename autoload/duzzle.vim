@@ -50,29 +50,29 @@ function! duzzle#start(...) " {{{
     " the last continuation
   elseif a:0 == 1
     if a:1 !~ '^\d\+$'
-      call s:EchoError('Error:Invalid Argument:'.a:1)
+      call s:EchoError('Error:Invalid Argument:%s', a:1)
       return
     endif
     if !s:exist_puzzle(s:current_experiment_name, a:1)
-      call s:EchoError('Error:No such puzzle:'.s:current_experiment_name.' '.a:1)
+      call s:EchoError('Error:No such puzzle:%s %s', s:current_experiment_name, a:1)
       return
     endif
     let s:current_puzzle_number = a:1
   elseif a:0 == 2
     if a:1 == ''
-      call s:EchoError('Error:Invalid Argument:'.a:1)
+      call s:EchoError('Error:Invalid Argument:%s', a:1)
       return
     endif
     if a:2 !~ '^\d\+$'
-      call s:EchoError('Error:Invalid Argument:'.a:2)
+      call s:EchoError('Error:Invalid Argument:%s', a:2)
       return
     endif
     if !s:exist_experiment(a:1)
-      call s:EchoError('Error:No such experiment:'.a:1)
+      call s:EchoError('Error:No such experiment:%s', a:1)
       return
     endif
     if !s:exist_puzzle(a:1, a:2)
-      call s:EchoError('Error:No such puzzle:'.a:1.' '.a:2)
+      call s:EchoError('Error:No such puzzle:%s %s', a:1, a:2)
       return
     endif
     let s:current_experiment_name = a:1
@@ -232,7 +232,7 @@ endfunction
 function! s:died_and_go_room_with_message(message) " {{{
   let s:died_times += 1
   call s:go_room()
-  call s:EchoWarning(printf(a:message, s:died_times))
+  call s:EchoWarning(a:message, s:died_times)
 endfunction
 " }}}
 
@@ -455,7 +455,7 @@ function! s:build_keydict(keys) " {{{
     endfor
     return keys
   else
-    call s:EchoError('Error:Invalid Argument:'.type(a:keys))
+    call s:EchoError('Error:Invalid Argument:%s', type(a:keys))
     return {}
   endif
 endfunction
@@ -580,15 +580,30 @@ function! s:noremap_buffer(lhs, rhs, modes) " {{{
 endfunction
 " }}}
 
-function! s:EchoWarning(message) " {{{
-  redraw!
-  call s:VM.echomsg('WarningMsg', a:message)
+function! s:EchoWarning(message, ...) " {{{
+  call s:Echo('WarningMsg', a:message, a:000)
 endfunction
 " }}}
 
-function! s:EchoError(message) " {{{
+function! s:EchoError(message, ...) " {{{
+  call s:Echo('ErrorMsg', a:message, a:000)
+endfunction
+" }}}
+
+function! s:Echo(level, message, args) " {{{
   redraw!
-  call s:VM.echomsg('ErrorMsg', a:message)
+  let alen = len(a:args)
+  if alen == 0
+    let message = a:message
+  elseif alen == 1
+    let message = printf(a:message, a:args[0])
+  elseif alen == 2
+    let message = printf(a:message, a:args[0], a:args[1])
+  else
+    echoerr printf('error: s:Echo(level=%s) must be'
+      \ 'specified lower equal than 3 argument', level)
+  endif
+  call s:VM.echomsg(a:level, message)
 endfunction
 " }}}
 
