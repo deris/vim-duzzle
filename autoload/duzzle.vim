@@ -84,7 +84,7 @@ function! duzzle#start(...) " {{{
   let s:current_puzzle = s:current_experiment[s:current_puzzle_number]
 
   " TODO: customize to change window create command
-  tabnew duzzle
+  tabnew [duzzle]
   if !s:puzzle_started
     call s:show_start_message()
   else
