@@ -26,12 +26,13 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 let s:V = vital#of('vim_duzzle')
+let s:P = s:V.import('Prelude')
 let s:LM = s:V.import('Locale.Message')
 let s:VM = s:V.import('Vim.Message')
 let s:message_path = 'message/%s.txt'
 let s:message = s:LM.new(s:message_path)
 let s:start_message = s:message.get('start_message')
-if type(s:start_message) == type('') &&
+if s:P.is_string(s:start_message) &&
   \s:start_message ==# 'start_message'
   call s:message.load('ja')
 endif
@@ -445,10 +446,10 @@ endfunction
 " }}}
 
 function! s:build_keydict(keys) " {{{
-  if type(a:keys) == type('') ||
-    \type(a:keys) == type([])
+  if s:P.is_string(a:keys) ||
+    \s:P.is_list(a:keys)
     return { 'n' : s:split2char_if_str(a:keys) }
-  elseif type(a:keys) == type({})
+  elseif s:P.is_dict(a:keys)
     let keys = {}
     for key in keys(a:keys)
       call extend(keys, { key : s:split2char_if_str(a:keys[key]) })
@@ -462,7 +463,7 @@ endfunction
 " }}}
 
 function! s:split2char_if_str(arg) " {{{
-  return type(a:arg) == type('') ? split(a:arg, '\zs') : a:arg
+  return s:P.is_string(a:arg) ? split(a:arg, '\zs') : a:arg
 endfunction
 " }}}
 
@@ -569,7 +570,7 @@ endfunction
 " }}}
 
 function! s:noremap_buffer(lhs, rhs, modes) " {{{
-  if type(a:modes) == type('')
+  if s:P.is_string(a:modes)
     let modes = split(a:modes, '\zs')
   else
     let modes = a:modes
