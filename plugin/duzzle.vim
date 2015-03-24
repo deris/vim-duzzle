@@ -30,7 +30,9 @@ let g:loaded_duzzle = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-command! -nargs=* DuzzleStart call duzzle#start(<f-args>)
+
+command! -nargs=* -complete=customlist,duzzle#complete
+  \ DuzzleStart call duzzle#start(<q-args>)
 
 
 let &cpo = s:save_cpo

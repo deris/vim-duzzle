@@ -27,6 +27,8 @@ set cpo&vim
 
 let s:V = vital#of('vim_duzzle')
 let s:P = s:V.import('Prelude')
+let s:O = s:V.import('OptionParser')
+let s:parser = s:O.new()
 let s:LM = s:V.import('Locale.Message')
 let s:VM = s:V.import('Vim.Message')
 let s:message_path = 'message/%s.txt'
@@ -37,50 +39,56 @@ if s:P.is_string(s:start_message) &&
   call s:message.load('ja')
 endif
 
+function! s:complete_experiment(optlead, cmdline, cursorpos)
+  return filter(duzzle#experiment_names(),
+    \ 'a:optlead == "" ? 1 : (v:val =~# a:optlead)')
+endfunction
+
+function! duzzle#complete(arglead, cmdline, cursorpos)
+  return s:parser.complete(a:arglead, a:cmdline, a:cursorpos)
+endfunction
+
+call s:parser.on('--experiment=VALUE', 'specifiy experiment name, has short option',
+  \ {
+  \   'short' : '-e',
+  \   'default' : '_',
+  \   'completion' : function('s:complete_experiment'),
+  \ })
+call s:parser.on('--num-room=VALUE', 'specifiy number of room, has short option',
+  \ {
+  \   'short' : '-n',
+  \   'default' : '1',
+  \   'pattern' : '^[1-9]\d*$',
+  \ })
 
 
 " Public API {{{
-function! duzzle#start(...) " {{{
+function! duzzle#start(args) " {{{
   " TODO: extract function to check parameter
-  if a:0 > 2
-    call s:EchoError('Error:Too much Argument.')
+  try
+    let args = s:parser.parse(a:args)
+  catch /vital: OptionParser: parameter doesn't match pattern: num-room/
+    let value = match(v:exception, 'match pattern: num-room \zs.*')
+    call s:EchoError("Error:room number '%s' doesn't exists.", value)
+    call s:EchoError(s:parser.help())
+    return
+  catch
+    call s:EchoError(v:exception)
+    call s:EchoError(s:parser.help())
+    return
+  endtry
+
+  if !s:exist_experiment(args['experiment'])
+    call s:EchoError('Error:No such experiment:experiment=%s', args['experiment'])
+    return
+  endif
+  if !s:exist_puzzle(args['experiment'], args['num-room'])
+    call s:EchoError('Error:No such puzzle:experiment=%s, num-room=%s', args['experiment'], args['num-room'])
     return
   endif
 
-  if a:0 == 0
-    " the last continuation
-  elseif a:0 == 1
-    if a:1 !~ '^\d\+$'
-      call s:EchoError('Error:Invalid Argument:%s', a:1)
-      return
-    endif
-    if !s:exist_puzzle(s:current_experiment_name, a:1)
-      call s:EchoError('Error:No such puzzle:%s %s', s:current_experiment_name, a:1)
-      return
-    endif
-    let s:current_puzzle_number = a:1
-  elseif a:0 == 2
-    if a:1 == ''
-      call s:EchoError('Error:Invalid Argument:%s', a:1)
-      return
-    endif
-    if a:2 !~ '^\d\+$'
-      call s:EchoError('Error:Invalid Argument:%s', a:2)
-      return
-    endif
-    if !s:exist_experiment(a:1)
-      call s:EchoError('Error:No such experiment:%s', a:1)
-      return
-    endif
-    if !s:exist_puzzle(a:1, a:2)
-      call s:EchoError('Error:No such puzzle:%s %s', a:1, a:2)
-      return
-    endif
-    let s:current_experiment_name = a:1
-    let s:current_puzzle_number = a:2
-  endif
-
-  let s:current_experiment = s:experiments[s:current_experiment_name]
+  let s:current_experiment = s:experiments[args['experiment']]
+  let s:current_puzzle_number = args['num-room'] - 1
   let s:current_puzzle = s:current_experiment[s:current_puzzle_number]
 
   " TODO: customize to change window create command
