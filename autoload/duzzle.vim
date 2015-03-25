@@ -64,26 +64,9 @@ call s:parser.on('--num-room=VALUE', 'specifiy number of room, has short option'
 
 " Public API {{{
 function! duzzle#start(args) " {{{
-  " TODO: extract function to check parameter
-  try
-    let args = s:parser.parse(a:args)
-  catch /vital: OptionParser: parameter doesn't match pattern: num-room/
-    let value = match(v:exception, 'match pattern: num-room \zs.*')
-    call s:EchoError("Error:room number '%s' doesn't exists.", value)
-    call s:EchoError(s:parser.help())
-    return
-  catch
-    call s:EchoError(v:exception)
-    call s:EchoError(s:parser.help())
-    return
-  endtry
+  let args = s:parse_args(a:args)
 
-  if !s:exist_experiment(args['experiment'])
-    call s:EchoError('Error:No such experiment:experiment=%s', args['experiment'])
-    return
-  endif
-  if !s:exist_puzzle(args['experiment'], args['num-room'])
-    call s:EchoError('Error:No such puzzle:experiment=%s, num-room=%s', args['experiment'], args['num-room'])
+  if empty(args)
     return
   endif
 
@@ -166,6 +149,33 @@ unlet s:duzzle_dir
 
 let s:current_key_limit = {}
 let s:puzzle_started = 0
+
+function! s:parse_args(args) " {{{
+  try
+    let args = s:parser.parse(a:args)
+  catch /vital: OptionParser: parameter doesn't match pattern: num-room/
+    let value = match(v:exception, 'match pattern: num-room \zs.*')
+    call s:EchoError("Error:room number '%s' doesn't exists.", value)
+    call s:EchoError(s:parser.help())
+    return {}
+  catch
+    call s:EchoError(v:exception)
+    call s:EchoError(s:parser.help())
+    return {}
+  endtry
+
+  if !s:exist_experiment(args['experiment'])
+    call s:EchoError('Error:No such experiment:experiment=%s', args['experiment'])
+    return {}
+  endif
+  if !s:exist_puzzle(args['experiment'], args['num-room'])
+    call s:EchoError('Error:No such puzzle:experiment=%s, num-room=%s', args['experiment'], args['num-room'])
+    return {}
+  endif
+
+  return args
+endfunction
+" }}}
 
 function! s:init_puzzle() " {{{
   call s:init_options()
