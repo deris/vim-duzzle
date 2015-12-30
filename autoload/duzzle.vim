@@ -1,6 +1,6 @@
 " vim-duzzle - This is vim puzzle game produced by deris0126
-" Version: 0.0.0
-" Copyright (C) 2013 deris0126
+" Version: 0.1.0
+" Copyright (C) 2013-2015 deris0126
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -51,13 +51,11 @@ endfunction
 call s:parser.on('--experiment=VALUE', 'specifiy experiment name, has short option',
   \ {
   \   'short' : '-e',
-  \   'default' : '_',
   \   'completion' : function('s:complete_experiment'),
   \ })
 call s:parser.on('--num-room=VALUE', 'specifiy number of room, has short option',
   \ {
   \   'short' : '-n',
-  \   'default' : '1',
   \   'pattern' : '^[1-9]\d*$',
   \ })
 
@@ -164,10 +162,35 @@ function! s:parse_args(args) " {{{
     return {}
   endtry
 
+  let unknown_args = get(args, '__unknown_args__', [])
+
+  if len(unknown_args) > 2
+    call s:EchoError('Error:unnamed parameter must be less than or equal to 2')
+    return {}
+  endif
+
+  if len(unknown_args) == 1
+    let args['num-room'] = get(args, 'num-room', unknown_args[0])
+  elseif len(unknown_args) == 2
+    let args['experiment'] = get(args, 'experiment', unknown_args[0])
+    let args['num-room']   = get(args, 'num-room', unknown_args[1])
+  endif
+  if !has_key(args, 'experiment')
+    let args['experiment'] = g:duzzle_default_experiment_name
+  endif
+  if !has_key(args, 'num-room')
+    let args['num-room'] = g:duzzle_default_room_number
+  endif
+
   if !s:exist_experiment(args['experiment'])
     call s:EchoError('Error:No such experiment:experiment=%s', args['experiment'])
     return {}
   endif
+  if args['num-room'] !~ '^[1-9]\d*$'
+    call s:EchoError('Error:room number must be positive integer:num-room=%s', args['num-room'])
+    return {}
+  endif
+
   if !s:exist_puzzle(args['experiment'], args['num-room'])
     call s:EchoError('Error:No such puzzle:experiment=%s, num-room=%s', args['experiment'], args['num-room'])
     return {}

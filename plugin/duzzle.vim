@@ -1,6 +1,6 @@
 " vim-duzzle - This is vim puzzle game produced by deris0126
-" Version: 0.0.0
-" Copyright (C) 2013 deris0126
+" Version: 0.1.0
+" Copyright (C) 2013-2015 deris0126
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -33,6 +33,9 @@ set cpo&vim
 
 command! -nargs=* -complete=customlist,duzzle#complete
   \ DuzzleStart call duzzle#start(<q-args>)
+
+let g:duzzle_default_experiment_name = '_'
+let g:duzzle_default_room_number     = '1'
 
 
 let &cpo = s:save_cpo
