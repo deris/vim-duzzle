@@ -41,7 +41,7 @@ endif
 
 function! s:complete_experiment(optlead, cmdline, cursorpos)
   return filter(duzzle#experiment_names(),
-    \ 'a:optlead == "" ? 1 : (v:val =~# a:optlead)')
+    \ 'a:optlead == "" || v:val =~# a:optlead')
 endfunction
 
 function! duzzle#complete(arglead, cmdline, cursorpos)
