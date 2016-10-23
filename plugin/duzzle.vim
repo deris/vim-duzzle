@@ -1,6 +1,6 @@
 " vim-duzzle - This is vim puzzle game produced by deris0126
 " Version: 0.1.0
-" Copyright (C) 2013-2015 deris0126
+" Copyright (C) 2013-2016 deris0126
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
