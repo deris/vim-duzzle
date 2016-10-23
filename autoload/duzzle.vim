@@ -462,7 +462,7 @@ function! s:add_line(str) " {{{
   if lastline == 1
     call setline(1, a:str)
   else
-    call setline(line('$')+1, a:str)
+    call setline(lastline+1, a:str)
   endif
 endfunction
 " }}}
