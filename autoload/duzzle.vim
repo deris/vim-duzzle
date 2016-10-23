@@ -483,9 +483,10 @@ endfunction
 " }}}
 
 function! s:is_wall_under_cursor() " {{{
-  return s:char_under_cursor() ==# '-' ||
-    \    s:char_under_cursor() ==# '|' ||
-    \    s:char_under_cursor() ==# '+'
+  let cur = s:char_under_cursor()
+  return cur ==# '-' ||
+    \    cur ==# '|' ||
+    \    cur ==# '+'
 endfunction
 " }}}
 
