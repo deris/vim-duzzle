@@ -1,5 +1,5 @@
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'first room',
+  \ 'name' : 'Room 1',
   \ 'enable_keys' : 'hjkl',
   \ 'room' : [
   \   '+--------+',
@@ -12,7 +12,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'second room',
+  \ 'name' : 'Room 2',
   \ 'enable_keys' : 'hjkl',
   \ 'room' : [
   \   '+--------+',
@@ -26,7 +26,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'third room',
+  \ 'name' : 'Room 3',
   \ 'enable_keys' : 'hjkl',
   \ 'room' : [
   \   '+--------+',
@@ -41,7 +41,7 @@ call duzzle#add_puzzle('_', {
 
 "count
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'fourth room',
+  \ 'name' : 'Room 4',
   \ 'enable_keys' : 'hjkl',
   \ 'room' : [
   \   '+--------+--------+',
@@ -56,7 +56,7 @@ call duzzle#add_puzzle('_', {
 
 "count
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'fifth room',
+  \ 'name' : 'Room 5',
   \ 'enable_keys' : 'hjkl',
   \ 'room' : [
   \   '+--------+--------+--------+',
@@ -70,7 +70,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'sixth room',
+  \ 'name' : 'Room 6',
   \ 'enable_keys' : 'jkw',
   \ 'room' : [
   \   '+--------+',
@@ -83,7 +83,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'seventh room',
+  \ 'name' : 'Room 7',
   \ 'enable_keys' : 'jkwb',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -98,7 +98,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'eighth room',
+  \ 'name' : 'Room 8',
   \ 'enable_keys' : ['j','k','w','b','e','ge'],
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -113,7 +113,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'ninth room',
+  \ 'name' : 'Room 9',
   \ 'enable_keys' : 'jkfF',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -128,7 +128,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'tenth room',
+  \ 'name' : 'Room 10',
   \ 'enable_keys' : 'jkfFtT',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -143,7 +143,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'eleventh room',
+  \ 'name' : 'Room 11',
   \ 'enable_keys' : 'jkfF;',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -158,7 +158,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'twelfth room',
+  \ 'name' : 'Room 12',
   \ 'enable_keys' : 'jkf;,',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -173,7 +173,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'thirteenth room',
+  \ 'name' : 'Room 13',
   \ 'enable_keys' : 'jkfFtT',
   \ 'room' : [
   \   '+--------+            +--------+',
@@ -187,7 +187,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'fourteenth room',
+  \ 'name' : 'Room 14',
   \ 'enable_keys' : ['j','k','w','b','e','ge'],
   \ 'room' : [
   \   '+--------+            +--------+',
@@ -201,7 +201,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'fifteenth room',
+  \ 'name' : 'Room 15',
   \ 'enable_keys' : 'jk^$',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -214,7 +214,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'sixteenth room',
+  \ 'name' : 'Room 16',
   \ 'enable_keys' : ['j','k','^','0','$','g_'],
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -229,7 +229,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'seventeenth room',
+  \ 'name' : 'Room 17',
   \ 'enable_keys' : ['j','k','^','0','$','g_'],
   \ 'room' : [
   \   '+---------+ ',
@@ -241,7 +241,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'eighteenth room',
+  \ 'name' : 'Room 18',
   \ 'enable_keys' : 'jkfF}{',
   \ 'room' : [
   \   '+--------+            +--------+',
@@ -263,7 +263,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'nineteenth room',
+  \ 'name' : 'Room 19',
   \ 'enable_keys' : 'jkfF}{',
   \ 'room' : [
   \   '+--------+            +--------+',
@@ -285,7 +285,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'twentieth room',
+  \ 'name' : 'Room 20',
   \ 'enable_keys' : '/',
   \ 'room' : [
   \   '+--------+            +--------+',
@@ -295,7 +295,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'twenty first room',
+  \ 'name' : 'Room 21',
   \ 'enable_keys' : '?',
   \ 'room' : [
   \   '+--------+            +--------+',
@@ -305,7 +305,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'twenty second room',
+  \ 'name' : 'Room 22',
   \ 'enable_keys' : 'jk*wnN',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -324,7 +324,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'twenty third room',
+  \ 'name' : 'Room 23',
   \ 'enable_keys' : 'jk#wnN',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -343,7 +343,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'twenty fourth room',
+  \ 'name' : 'Room 24',
   \ 'enable_keys' : 'jkhl%',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -354,7 +354,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'twenty fifth room',
+  \ 'name' : 'Room 25',
   \ 'enable_keys' : 'jkhl%',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -373,7 +373,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'twenty sixth room',
+  \ 'name' : 'Room 26',
   \ 'enable_keys' : 'jkhl%',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -392,7 +392,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'twenty seventh room',
+  \ 'name' : 'Room 27',
   \ 'enable_keys' : 'jk%fF',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -411,7 +411,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'twenty eighth room',
+  \ 'name' : 'Room 28',
   \ 'enable_keys' : {
   \   'n' : 'jkhld',
   \   'o' : 'f',
@@ -428,7 +428,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'twenty ninth room',
+  \ 'name' : 'Room 29',
   \ 'enable_keys' : {
   \   'n' : 'jkhld',
   \   'o' : 't',
@@ -447,7 +447,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'thirtieth room',
+  \ 'name' : 'Room 30',
   \ 'enable_keys' : {
   \   'n' : 'jkhld',
   \   'o' : 't',
@@ -465,7 +465,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'thirty first room',
+  \ 'name' : 'Room 31',
   \ 'enable_keys' : {
   \   'n' : 'jkhld',
   \   'o' : 't',
@@ -489,7 +489,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'thirty second room',
+  \ 'name' : 'Room 32',
   \ 'enable_keys' : {
   \   'n' : 'hl%',
   \   'o' : 't',
@@ -515,7 +515,7 @@ call duzzle#add_puzzle('_', {
 
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'thirty third room',
+  \ 'name' : 'Room 33',
   \ 'enable_keys' : {
   \   'n' : 'hl%d',
   \   'o' : 'f',
@@ -541,7 +541,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'thirty fourth room',
+  \ 'name' : 'Room 34',
   \ 'enable_keys' : {
   \   'n' : 'hl%d',
   \   'o' : 't',
@@ -567,7 +567,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'thirty fifth room',
+  \ 'name' : 'Room 35',
   \ 'enable_keys' : 'jl',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -581,7 +581,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'thirty sixth room',
+  \ 'name' : 'Room 36',
   \ 'enable_keys' : 'jl',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -602,7 +602,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'thirty seventh room',
+  \ 'name' : 'Room 37',
   \ 'enable_keys' : 'jkl}$',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -625,7 +625,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'thirty eighth room',
+  \ 'name' : 'Room 38',
   \ 'enable_keys' : 'l%',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -637,7 +637,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'thirty nineth room',
+  \ 'name' : 'Room 39',
   \ 'disable_key_count' : 1,
   \ 'enable_keys' : 'l%',
   \ 'room' : [
@@ -654,7 +654,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'fortieth room',
+  \ 'name' : 'Room 40',
   \ 'enable_keys' : 'l%',
   \ 'disable_key_count' : 1,
   \ 'room' : [
@@ -671,7 +671,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'forty first room',
+  \ 'name' : 'Room 41',
   \ 'enable_keys' : 'hjkl',
   \ 'limit_key_use' : {
   \   'n': {
@@ -690,7 +690,7 @@ call duzzle#add_puzzle('_', {
   \ })
 
 call duzzle#add_puzzle('_', {
-  \ 'name' : 'forty second room',
+  \ 'name' : 'Room 42',
   \ 'enable_keys' : 'hjkl',
   \ 'limit_key_use' : {
   \   'n': {
