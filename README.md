@@ -6,7 +6,7 @@ This is puzzle game on vim.
 Screenshot
 ---
 
-![screenshot](http://gifzo.net/jBcfG8aDEC.gif)
+![screenshot](https://raw.githubusercontent.com/deris/s/master/vim-duzzle/vim-duzzle_01_start_game.gif)
 
 
 Usage
