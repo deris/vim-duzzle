@@ -16,5 +16,6 @@ Usage
 :DuzzleStart
 ```
 
-Warning:this game monopolize vim key mapping, so if you want to quit the game, press 'Q'.
+\:exclamation:Warning\:exclamation: this game monopolize vim key mapping, so if you want to quit the game, press 'Q'.
+
 
