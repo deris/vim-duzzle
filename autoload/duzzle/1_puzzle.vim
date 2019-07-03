@@ -491,7 +491,7 @@ call duzzle#add_puzzle('_', {
 call duzzle#add_puzzle('_', {
   \ 'name' : 'Room 32',
   \ 'enable_keys' : {
-  \   'n' : 'hl%',
+  \   'n' : 'hld%',
   \   'o' : 't',
   \ },
   \ 'disable_key_count' : 1,
