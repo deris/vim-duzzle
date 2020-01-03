@@ -36,7 +36,7 @@ let s:message = s:LM.new(s:message_path)
 let s:start_message = s:message.get('start_message')
 if s:P.is_string(s:start_message) &&
   \s:start_message ==# 'start_message'
-  call s:message.load('ja')
+  call s:message.load(get(g:, 'duzzle_language', 'en'))
 endif
 
 function! s:complete_experiment(optlead, cmdline, cursorpos)
