@@ -37,6 +37,20 @@ command! -nargs=* -complete=customlist,duzzle#complete
 let g:duzzle_default_experiment_name = '_'
 let g:duzzle_default_room_number     = '1'
 
+if !exists('g:Lf_Extensions')
+  let g:Lf_Extensions = {}
+endif
+
+let g:Lf_Extensions.duzzle = {
+      \ 'source': 'leaderf#duzzle#source',
+      \ 'accept': 'leaderf#duzzle#accept',
+      \ 'highlights_def': {
+      \ 'Lf_hl_duzzleTitle': '.*',
+      \ },
+      \ 'highlights_cmd': [
+      \ 'hi link Lf_hl_duzzleTitle Title',
+      \ ],
+      \ }
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
